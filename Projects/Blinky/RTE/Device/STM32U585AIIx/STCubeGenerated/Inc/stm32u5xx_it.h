@@ -62,5 +62,3 @@ void DebugMon_Handler(void);
 #endif
 
 #endif /* __STM32U5xx_IT_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

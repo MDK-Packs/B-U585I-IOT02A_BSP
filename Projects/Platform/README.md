@@ -34,7 +34,7 @@ The example project can be re-configured to work on custom hardware. Refer to ["
 
 | System Component        | Setting
 |:------------------------|:----------------------------------------
-| Device                  | STM32U585AIIxQ
+| Device                  | STM32U585AIIx
 | ICACHE                  | Mode: 2-ways set associative cache
 | Heap                    | 64 kB (configured in startup file)
 | Stack (MSP)             | 1 kB (configured in startup file)
