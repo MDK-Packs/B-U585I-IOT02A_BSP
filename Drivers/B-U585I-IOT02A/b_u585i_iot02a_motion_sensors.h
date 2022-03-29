@@ -30,7 +30,7 @@ extern "C" {
 #include "b_u585i_iot02a_errno.h"
 #include "../Components/Common/motion_sensor.h"
 #include "../Components/iis2mdc/iis2mdc.h"
-#include "../Components/ism330dlc/ism330dlc.h"
+#include "../Components/ism330dhcx/ism330dhcx.h"
 #include <math.h>
 
 /** @addtogroup BSP
@@ -50,16 +50,16 @@ extern "C" {
   */
 typedef struct
 {
-  int32_t x;
-  int32_t y;
-  int32_t z;
+  int32_t xval;
+  int32_t yval;
+  int32_t zval;
 } BSP_MOTION_SENSOR_Axes_t;
 
 typedef struct
 {
-  int16_t x;
-  int16_t y;
-  int16_t z;
+  int16_t xval;
+  int16_t yval;
+  int16_t zval;
 } BSP_MOTION_SENSOR_AxesRaw_t;
 
 /* Motion Sensor instance Info */
@@ -99,7 +99,6 @@ typedef struct
 #define MOTION_GYRO             1U
 #define MOTION_ACCELERO         2U
 #define MOTION_MAGNETO          4U
-#define ISM330DLC_ID_2       0x6BU
 /**
   * @}
   */

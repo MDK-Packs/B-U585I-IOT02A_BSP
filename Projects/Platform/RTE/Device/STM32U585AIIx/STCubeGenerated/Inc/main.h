@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2022 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -69,8 +68,9 @@ extern void app_initialize (void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define WRLS_FLOW_Pin GPIO_PIN_15
-#define WRLS_FLOW_GPIO_Port GPIOG
+#define MXCHIP_FLOW_Pin GPIO_PIN_15
+#define MXCHIP_FLOW_GPIO_Port GPIOG
+#define MXCHIP_FLOW_EXTI_IRQn EXTI15_IRQn
 #define WRLS_UART4_RX_Pin GPIO_PIN_11
 #define WRLS_UART4_RX_GPIO_Port GPIOC
 #define USB_UCPD_CC1_Pin GPIO_PIN_15
@@ -141,8 +141,8 @@ extern void app_initialize (void);
 #define OCTOSPI_F_IO3_GPIO_Port GPIOF
 #define OCTOSPI_F_CLK_P_Pin GPIO_PIN_4
 #define OCTOSPI_F_CLK_P_GPIO_Port GPIOF
-#define ARDUINO_IO_D9_Pin GPIO_PIN_8
-#define ARDUINO_IO_D9_GPIO_Port GPIOA
+#define ARDUINO_D9_DATAREADY_Pin GPIO_PIN_8
+#define ARDUINO_D9_DATAREADY_GPIO_Port GPIOA
 #define T_VCP_TX_Pin GPIO_PIN_9
 #define T_VCP_TX_GPIO_Port GPIOA
 #define USB_C_PA11_Pin GPIO_PIN_11
@@ -161,14 +161,17 @@ extern void app_initialize (void);
 #define MIC_CCK0_GPIO_Port GPIOE
 #define Mems_VLX_GPIO_Pin GPIO_PIN_5
 #define Mems_VLX_GPIO_GPIO_Port GPIOG
-#define WRLS_NOTIFY_Pin GPIO_PIN_14
-#define WRLS_NOTIFY_GPIO_Port GPIOD
+#define MXCHIP_NOTIFY_Pin GPIO_PIN_14
+#define MXCHIP_NOTIFY_GPIO_Port GPIOD
+#define MXCHIP_NOTIFY_EXTI_IRQn EXTI14_IRQn
 #define OCTOSPI_R_IO6_Pin GPIO_PIN_3
 #define OCTOSPI_R_IO6_GPIO_Port GPIOC
 #define OCTOSPI_F_DQS_Pin GPIO_PIN_12
 #define OCTOSPI_F_DQS_GPIO_Port GPIOF
 #define USB_UCPD_FLT_Pin GPIO_PIN_8
 #define USB_UCPD_FLT_GPIO_Port GPIOE
+#define ARDUINO_D12_SPI1_MISO_Pin GPIO_PIN_14
+#define ARDUINO_D12_SPI1_MISO_GPIO_Port GPIOE
 #define OCTOSPI_R_CLK_P_Pin GPIO_PIN_10
 #define OCTOSPI_R_CLK_P_GPIO_Port GPIOB
 #define Mems_INT_IIS2MDC_Pin GPIO_PIN_10
@@ -179,24 +182,30 @@ extern void app_initialize (void);
 #define Mems_INT_LPS22HH_GPIO_Port GPIOG
 #define USB_VBUS_SENSE_Pin GPIO_PIN_14
 #define USB_VBUS_SENSE_GPIO_Port GPIOF
+#define ARDUINO_D13_SPI1_SCK_Pin GPIO_PIN_13
+#define ARDUINO_D13_SPI1_SCK_GPIO_Port GPIOE
 #define OCTOSPI_R_NCS_Pin GPIO_PIN_11
 #define OCTOSPI_R_NCS_GPIO_Port GPIOB
-#define WRLS_SPI2_NSS_Pin GPIO_PIN_12
-#define WRLS_SPI2_NSS_GPIO_Port GPIOB
+#define MXCHIP_NSS_Pin GPIO_PIN_12
+#define MXCHIP_NSS_GPIO_Port GPIOB
 #define USB_UCPD_CC2_Pin GPIO_PIN_15
 #define USB_UCPD_CC2_GPIO_Port GPIOB
-#define Mems_INT_IIS2MDCD9_Pin GPIO_PIN_9
-#define Mems_INT_IIS2MDCD9_GPIO_Port GPIOD
+#define ARDUINO_D1_TX_Pin GPIO_PIN_8
+#define ARDUINO_D1_TX_GPIO_Port GPIOD
+#define ARDUINO_D0_RX_Pin GPIO_PIN_9
+#define ARDUINO_D0_RX_GPIO_Port GPIOD
 #define Mems_STSAFE_RESET_Pin GPIO_PIN_11
 #define Mems_STSAFE_RESET_GPIO_Port GPIOF
 #define Mems_ISM330DLC_INT1_Pin GPIO_PIN_11
 #define Mems_ISM330DLC_INT1_GPIO_Port GPIOE
+#define ARDUINO_D11_SPI1_MOSI_Pin GPIO_PIN_15
+#define ARDUINO_D11_SPI1_MOSI_GPIO_Port GPIOE
 #define MIC_SDIN0_Pin GPIO_PIN_1
 #define MIC_SDIN0_GPIO_Port GPIOB
-#define WRLS_WKUP_W_Pin GPIO_PIN_15
-#define WRLS_WKUP_W_GPIO_Port GPIOF
-#define ARDUINO_IO_D10_Pin GPIO_PIN_12
-#define ARDUINO_IO_D10_GPIO_Port GPIOE
+#define MXCHIP_RESET_Pin GPIO_PIN_15
+#define MXCHIP_RESET_GPIO_Port GPIOF
+#define ARDUINO_D10_SPI1_NSS_Pin GPIO_PIN_12
+#define ARDUINO_D10_SPI1_NSS_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

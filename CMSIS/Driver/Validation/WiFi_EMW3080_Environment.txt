@@ -1,0 +1,11 @@
+The Test Report in the WiFi_EMW3080_TestReport.txt file was produced with the following configuration:
+ - Hardware:                    STMicroelectonics B-U585I-IOT02A board with on-board MXCHIP EMW3080B WiFi Module
+ - WiFi Module Firmware:        V2.1.11
+ - WiFi Module Interface:       SPI at 20 MHz
+
+Packs used for validation:
+ - Keil::B-U585I-IOT02A_BSP     v1.0.0
+ - ARM::CMSIS-Driver_Validation v3.0.0
+ - ARM::CMSIS                   v5.8.0
+ - Keil::STM32U5xx_DFP          v1.2.0
+ - Keil::ARM_Compiler           v1.6.3

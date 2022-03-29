@@ -34,11 +34,7 @@
 #include  RTE_RTX_CONFIG_H
 #endif
 #endif
-
-#ifndef RTE_Compiler_EventRecorder
-#define OS_EVR_INIT                 0
-#endif
-
+ 
 //-------- <<< Use Configuration Wizard in Context Menu >>> --------------------
  
 // <h>System Configuration
@@ -150,7 +146,7 @@
 //   <i> Enables stack overrun check at thread switch (requires RTX source variant).
 //   <i> Enabling this option increases slightly the execution time of a thread switch.
 #ifndef OS_STACK_CHECK
-#define OS_STACK_CHECK              1
+#define OS_STACK_CHECK              0
 #endif
  
 //   <q>Stack usage watermark

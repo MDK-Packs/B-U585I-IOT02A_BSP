@@ -15,5 +15,10 @@ Operation
 
  - The vioBUTTON0 changes the blink frequency and start/stops vioLED1.
 
-The board hardware mapping of vioLED0, vioLED1, and vioBUTTON0 depends on the 
-configuration of the CMSIS-Driver VIO.
+### CMSIS-Driver Virtual I/O mapping
+
+| CMSIS-Driver VIO  | Physical resource
+|:------------------|:-------------------------------
+| vioBUTTON0        | Button USER (PC13)
+| vioLED0           | LED RED (PH6)
+| vioLED1           | LED GREEN (PH7)

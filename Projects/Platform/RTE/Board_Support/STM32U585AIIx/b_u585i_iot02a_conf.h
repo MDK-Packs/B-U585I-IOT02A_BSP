@@ -65,9 +65,6 @@ extern "C" {
 #define BUS_I2C1_FREQUENCY                   100000UL /* Frequency of I2C1 = 100 KHz*/
 #define BUS_I2C2_FREQUENCY                   100000UL /* Frequency of I2C2 = 100 KHz*/
 
-/* Default AUDIO IN internal buffer size in 32-bit words per micro */
-#define BSP_AUDIO_IN_DEFAULT_BUFFER_SIZE  8192UL   /* 2048*4 = 8Kbytes */
-
 /* Usage of USBPD PWR TRACE system */
 #define USE_BSP_USBPD_PWR_TRACE       0U      /* USBPD BSP trace system is disabled */
 

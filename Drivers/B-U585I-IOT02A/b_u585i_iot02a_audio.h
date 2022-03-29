@@ -246,3 +246,4 @@ HAL_StatusTypeDef MX_MDF1_Init(MDF_HandleTypeDef *hAdfBlock, MX_MDF_InitTypeDef 
 #endif
 
 #endif /* B_U585I_IOT02A_AUDIO_H */
+

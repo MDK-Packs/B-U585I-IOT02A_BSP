@@ -26,6 +26,7 @@
                    - SampleRate: Select the input sample rate (8Khz .. 96Khz).
                    - BitsPerSample: Select the input resolution (16 or 32bits per sample).
                    - ChannelsNbr: Select the input channels number(1 for mono, 2 for stereo).
+                                  Stereo mode is working only with 2 Michrophones (Device = AUDIO_IN_DEVICE_DIGITAL_MIC)
                    - Volume: Select the input volume(0% .. 100%).
 
       This function configures all the hardware required for the audio application (MDF,
@@ -40,10 +41,12 @@
       within stm32u5xx_hal_conf.h file.
 
    + Call the function BSP_EVAL_AUDIO_IN_Record() to record audio stream. The recorded data are stored
-        to user buffer in raw (L, R, L, R ...).
+        to user buffer in raw (First buffer half contains MIC1 samples and second buffer half contains MIC2 samples ).
         Instance : Select the input instance. Can be only 0 (MDF).
         pBuf: pointer to user buffer.
         NbrOfBytes: Total size of the buffer to be sent in Bytes.
+        User can retrieve the written data via BSP_AUDIO_IN_TransferComplete_CallBack() and
+        BSP_AUDIO_IN_HalfTransfer_CallBack() callback functions.
 
    + Call the function BSP_AUDIO_IN_Pause() to pause recording.
    + Call the function BSP_AUDIO_IN_Resume() to resume recording.
@@ -89,13 +92,13 @@
   * @{
   */
 #define MDF_DECIMATION_RATIO(__FREQUENCY__) \
-  ((__FREQUENCY__) == (AUDIO_FREQUENCY_8K)) ? (128U) \
-  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_11K)) ? (64U) \
-  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_16K)) ? (44u) \
-  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_22K)) ? (32U) \
-  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_32K)) ? (22U) \
-  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_44K)) ? (16U) \
-  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_48K)) ? (11U) : (64U)
+  ((__FREQUENCY__) == (AUDIO_FREQUENCY_8K)) ? (512U) \
+  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_11K)) ? (256U) \
+  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_16K)) ? (176U) \
+  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_22K)) ? (128U) \
+  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_32K)) ? (88U) \
+  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_44K)) ? (64U) \
+  : ((__FREQUENCY__) == (AUDIO_FREQUENCY_48K)) ? (44U) : (128U)
 
 /**
   * @}
@@ -127,13 +130,6 @@ AUDIO_Drv_t *Audio_Drv = NULL;
 MDF_HandleTypeDef   haudio_in_mdf_filter[AUDIO_IN_DEVICE_NUMBER] = {{0}, {0}};
 DMA_HandleTypeDef   haudio_mdf[AUDIO_IN_DEVICE_NUMBER] = {{0}, {0}};
 
-/* Audio in MDF internal buffers and global variables */
-static int32_t  Audio_DigMic1RecBuff[BSP_AUDIO_IN_DEFAULT_BUFFER_SIZE] = {0};
-static int32_t  Audio_DigMic2RecBuff[BSP_AUDIO_IN_DEFAULT_BUFFER_SIZE] = {0};
-static uint32_t Audio_DmaDigMic1RecHalfBuffCplt;
-static uint32_t Audio_DmaDigMic1RecBuffCplt;
-static uint32_t Audio_DmaDigMic2RecHalfBuffCplt;
-static uint32_t Audio_DmaDigMic2RecBuffCplt;
 static MDF_FilterConfigTypeDef filterConfig;
 static MDF_DmaConfigTypeDef dmaConfig;
 
@@ -194,6 +190,11 @@ int32_t BSP_AUDIO_IN_Init(uint32_t Instance, BSP_AUDIO_Init_t *AudioInit)
   else if (AudioInit->BitsPerSample != AUDIO_RESOLUTION_16B)
   {
     status = BSP_ERROR_FEATURE_NOT_SUPPORTED;
+  }
+  else if ((AudioInit->ChannelsNbr == 1U) && (AudioInit->ChannelsNbr ==  AUDIO_IN_DEVICE_DIGITAL_MIC))
+  {
+    /* Stereo mode is working only with 2 michrophones */
+    status = BSP_ERROR_WRONG_PARAM;
   }
   else
   {
@@ -319,18 +320,6 @@ int32_t BSP_AUDIO_IN_Init(uint32_t Instance, BSP_AUDIO_Init_t *AudioInit)
 
           if (status == BSP_ERROR_NONE)
           {
-            /* Initialise transfer control flag */
-            if ((Audio_In_Ctx[Instance].Device & AUDIO_IN_DEVICE_DIGITAL_MIC1) == AUDIO_IN_DEVICE_DIGITAL_MIC1)
-            {
-              Audio_DmaDigMic1RecHalfBuffCplt = 0;
-              Audio_DmaDigMic1RecBuffCplt     = 0;
-            }
-            if ((Audio_In_Ctx[Instance].Device & AUDIO_IN_DEVICE_DIGITAL_MIC2) == AUDIO_IN_DEVICE_DIGITAL_MIC2)
-            {
-              Audio_DmaDigMic2RecHalfBuffCplt = 0;
-              Audio_DmaDigMic2RecBuffCplt     = 0;
-            }
-
             /* Update audio in context state */
             Audio_In_Ctx[Instance].State = AUDIO_IN_STATE_STOP;
           }
@@ -417,11 +406,6 @@ int32_t BSP_AUDIO_IN_Record(uint32_t Instance, uint8_t *pData, uint32_t NbrOfByt
   {
     status = BSP_ERROR_WRONG_PARAM;
   }
-  /* Check the internal buffer size */
-  else if ((Instance == 0U) && ((NbrOfBytes / 2U) > BSP_AUDIO_IN_DEFAULT_BUFFER_SIZE))
-  {
-    status = BSP_ERROR_WRONG_PARAM;
-  }
   /* Check audio in state */
   else if (Audio_In_Ctx[Instance].State != AUDIO_IN_STATE_STOP)
   {
@@ -432,24 +416,12 @@ int32_t BSP_AUDIO_IN_Record(uint32_t Instance, uint8_t *pData, uint32_t NbrOfByt
     if (Instance == 0U)
     {
       Audio_In_Ctx[Instance].pBuff = pData;
-      Audio_In_Ctx[Instance].Size  = NbrOfBytes;
-
-      /* Initialise transfer control flag */
-      if ((Audio_In_Ctx[Instance].Device & AUDIO_IN_DEVICE_DIGITAL_MIC1) == AUDIO_IN_DEVICE_DIGITAL_MIC1)
-      {
-        Audio_DmaDigMic1RecHalfBuffCplt = 0;
-        Audio_DmaDigMic1RecBuffCplt     = 0;
-      }
-      if ((Audio_In_Ctx[Instance].Device & AUDIO_IN_DEVICE_DIGITAL_MIC2) == AUDIO_IN_DEVICE_DIGITAL_MIC2)
-      {
-        Audio_DmaDigMic2RecHalfBuffCplt = 0;
-        Audio_DmaDigMic2RecBuffCplt     = 0;
-      }
+      Audio_In_Ctx[Instance].Size  = NbrOfBytes / Audio_In_Ctx[Instance].ChannelsNbr;
 
       /* Initialize the filter configuration parameters */
       filterConfig.DataSource      = MDF_DATA_SOURCE_BSMX;
       filterConfig.Delay           = 0U;
-      filterConfig.CicMode         = MDF_ONE_FILTER_SINC5;
+      filterConfig.CicMode         = MDF_ONE_FILTER_SINC4;
       filterConfig.DecimationRatio = MDF_DECIMATION_RATIO(Audio_In_Ctx[Instance].SampleRate);
       filterConfig.Offset          = 0;
       filterConfig.Gain            = 0;
@@ -478,11 +450,10 @@ int32_t BSP_AUDIO_IN_Record(uint32_t Instance, uint8_t *pData, uint32_t NbrOfByt
       filterConfig.Trigger.Edge    = MDF_FILTER_TRIG_RISING_EDGE;
       filterConfig.SnapshotFormat  = MDF_SNAPSHOT_23BITS;
 
-      if (((Audio_In_Ctx[Instance].Device & AUDIO_IN_DEVICE_DIGITAL_MIC1) == AUDIO_IN_DEVICE_DIGITAL_MIC1)
-          && (status == BSP_ERROR_NONE))
+      if ((Audio_In_Ctx[Instance].Device == AUDIO_IN_DEVICE_DIGITAL_MIC1) && (status == BSP_ERROR_NONE))
       {
         /* Initialize DMA configuration parameters */
-        dmaConfig.Address    = (uint32_t)&Audio_DigMic1RecBuff;
+        dmaConfig.Address    = (uint32_t) Audio_In_Ctx[Instance].pBuff;
         dmaConfig.DataLength = Audio_In_Ctx[Instance].Size;
         dmaConfig.MsbOnly    = ENABLE;
 
@@ -496,11 +467,41 @@ int32_t BSP_AUDIO_IN_Record(uint32_t Instance, uint8_t *pData, uint32_t NbrOfByt
           status = BSP_ERROR_PERIPH_FAILURE;
         }
       }
-      if (((Audio_In_Ctx[Instance].Device & AUDIO_IN_DEVICE_DIGITAL_MIC2) == AUDIO_IN_DEVICE_DIGITAL_MIC2)
-          && (status == BSP_ERROR_NONE))
+      if ((Audio_In_Ctx[Instance].Device == AUDIO_IN_DEVICE_DIGITAL_MIC2) && (status == BSP_ERROR_NONE))
       {
         /* Initialize DMA configuration parameters */
-        dmaConfig.Address    = (uint32_t)&Audio_DigMic2RecBuff;
+        dmaConfig.Address    = (uint32_t) Audio_In_Ctx[Instance].pBuff;
+        dmaConfig.DataLength = Audio_In_Ctx[Instance].Size;
+        dmaConfig.MsbOnly    = ENABLE;
+
+        /* Call the Media layer start function for MIC2 channel */
+        if (HAL_MDF_AcqStart_DMA(&haudio_in_mdf_filter[1], &filterConfig, &dmaConfig) != HAL_OK)
+        {
+          status = BSP_ERROR_PERIPH_FAILURE;
+        }
+        if (HAL_MDF_GenerateTrgo(&haudio_in_mdf_filter[1]) != HAL_OK)
+        {
+          status = BSP_ERROR_PERIPH_FAILURE;
+        }
+      }
+      if ((Audio_In_Ctx[Instance].Device == AUDIO_IN_DEVICE_DIGITAL_MIC) && (status == BSP_ERROR_NONE))
+      {
+        /* Initialize DMA configuration parameters */
+        dmaConfig.Address    = (uint32_t) Audio_In_Ctx[Instance].pBuff;
+        dmaConfig.DataLength = Audio_In_Ctx[Instance].Size;
+        dmaConfig.MsbOnly    = ENABLE;
+
+        /* Call the Media layer start function for MIC1 channel */
+        if (HAL_MDF_AcqStart_DMA(&haudio_in_mdf_filter[0], &filterConfig, &dmaConfig) != HAL_OK)
+        {
+          status = BSP_ERROR_PERIPH_FAILURE;
+        }
+        if (HAL_MDF_GenerateTrgo(&haudio_in_mdf_filter[0]) != HAL_OK)
+        {
+          status = BSP_ERROR_PERIPH_FAILURE;
+        }
+        /* Initialize DMA configuration parameters */
+        dmaConfig.Address    = (uint32_t) &Audio_In_Ctx[Instance].pBuff[Audio_In_Ctx[Instance].Size / 2U];
         dmaConfig.DataLength = Audio_In_Ctx[Instance].Size;
         dmaConfig.MsbOnly    = ENABLE;
 
@@ -595,17 +596,6 @@ int32_t BSP_AUDIO_IN_Resume(uint32_t Instance)
   {
     if (Instance == 0U)
     {
-      /* Initialise transfer control flag */
-      if ((Audio_In_Ctx[Instance].Device & AUDIO_IN_DEVICE_DIGITAL_MIC1) == AUDIO_IN_DEVICE_DIGITAL_MIC1)
-      {
-        Audio_DmaDigMic1RecHalfBuffCplt = 0;
-        Audio_DmaDigMic1RecBuffCplt     = 0;
-      }
-      if ((Audio_In_Ctx[Instance].Device & AUDIO_IN_DEVICE_DIGITAL_MIC2) == AUDIO_IN_DEVICE_DIGITAL_MIC2)
-      {
-        Audio_DmaDigMic2RecHalfBuffCplt = 0;
-        Audio_DmaDigMic2RecBuffCplt     = 0;
-      }
 
       if (((Audio_In_Ctx[Instance].Device & AUDIO_IN_DEVICE_DIGITAL_MIC1) == AUDIO_IN_DEVICE_DIGITAL_MIC1)
           && (status == BSP_ERROR_NONE))
@@ -1199,6 +1189,7 @@ static void MDF_BlockMspInit(MDF_HandleTypeDef *hmdf)
 
     if (MdfQueue1.Head == NULL)
     {
+      /* ADF DMA configuration */
       dmaNodeConfig.NodeType                    = DMA_GPDMA_LINEAR_NODE;
       dmaNodeConfig.Init                        = haudio_mdf[0].Init;
       dmaNodeConfig.Init.Request                = GPDMA1_REQUEST_ADF1_FLT0;
@@ -1306,6 +1297,7 @@ static void MDF_BlockMspInit(MDF_HandleTypeDef *hmdf)
 
     if (MdfQueue2.Head == NULL)
     {
+      /* MDF DMA configuration */
       dmaNodeConfig.NodeType                    = DMA_GPDMA_LINEAR_NODE;
       dmaNodeConfig.Init                        = haudio_mdf[1].Init;
       dmaNodeConfig.Init.Request                = GPDMA1_REQUEST_MDF1_FLT0;
@@ -1461,50 +1453,14 @@ static void MDF_BlockMspDeInit(MDF_HandleTypeDef *hmdf)
   */
 static void MDF_AcquisitionCpltCallback(MDF_HandleTypeDef *hmdf_filter)
 {
-  uint32_t     index;
-  uint32_t     recbufsize = (Audio_In_Ctx[0].Size / (4U * Audio_In_Ctx[0].ChannelsNbr));
-
-  if (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC)
-  {
-    for (index = (recbufsize / 2U); index < recbufsize; index++)
-    {
-      Audio_In_Ctx[0].pBuff[2U * index] = Audio_DigMic1RecBuff[index];
-      Audio_In_Ctx[0].pBuff[(2U * index) + 1] = Audio_DigMic2RecBuff[index];
-    }
-  }
-  else if (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC1)
-  {
-    for (index = (recbufsize / 2U); index < recbufsize; index++)
-    {
-      Audio_In_Ctx[0].pBuff[index] = Audio_DigMic1RecBuff[index];
-    }
-  }
-  else /* Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC2 */
-  {
-    for (index = (recbufsize / 2U); index < recbufsize; index++)
-    {
-      Audio_In_Ctx[0].pBuff[index] = Audio_DigMic2RecBuff[index];
-    }
-  }
-
   /* Invoke 'TransferCompete' callback function */
   if (hmdf_filter == &haudio_in_mdf_filter[0])
   {
-    Audio_DmaDigMic1RecBuffCplt = 1;
+    BSP_AUDIO_IN_TransferComplete_CallBack(0);
   }
   else
   {
-    Audio_DmaDigMic2RecBuffCplt = 1;
-  }
-
-  if (((Audio_DmaDigMic1RecBuffCplt != 0U) && (Audio_DmaDigMic2RecBuffCplt != 0U)
-       && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC)) ||
-      ((Audio_DmaDigMic1RecBuffCplt != 0U) && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC1)) ||
-      ((Audio_DmaDigMic2RecBuffCplt != 0U) && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC2)))
-  {
-    BSP_AUDIO_IN_TransferComplete_CallBack(0);
-    Audio_DmaDigMic1RecBuffCplt = 0;
-    Audio_DmaDigMic2RecBuffCplt = 0;
+    BSP_AUDIO_IN_TransferComplete_CallBack(1);
   }
 }
 
@@ -1515,50 +1471,14 @@ static void MDF_AcquisitionCpltCallback(MDF_HandleTypeDef *hmdf_filter)
   */
 static void MDF_AcquisitionHalfCpltCallback(MDF_HandleTypeDef *hmdf_filter)
 {
-  uint32_t     index;
-  uint32_t     recbufsize = (Audio_In_Ctx[0].Size / (4U * Audio_In_Ctx[0].ChannelsNbr));
-
-  if (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC)
-  {
-    for (index = 0; index < (recbufsize / 2U); index++)
-    {
-      Audio_In_Ctx[0].pBuff[2U * index] = Audio_DigMic1RecBuff[index];
-      Audio_In_Ctx[0].pBuff[(2U * index) + 1] = Audio_DigMic2RecBuff[index];
-    }
-  }
-  else if (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC1)
-  {
-    for (index = 0; index < (recbufsize / 2U); index++)
-    {
-      Audio_In_Ctx[0].pBuff[index] = Audio_DigMic1RecBuff[index];
-    }
-  }
-  else /* Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC2 */
-  {
-    for (index = 0; index < (recbufsize / 2U); index++)
-    {
-      Audio_In_Ctx[0].pBuff[index] = Audio_DigMic2RecBuff[index];
-    }
-  }
-
-  /* Invoke the 'HalfTransfer' callback function */
+  /* Invoke 'TransferCompete' callback function */
   if (hmdf_filter == &haudio_in_mdf_filter[0])
   {
-    Audio_DmaDigMic1RecHalfBuffCplt = 1;
+    BSP_AUDIO_IN_HalfTransfer_CallBack(0);
   }
   else
   {
-    Audio_DmaDigMic2RecHalfBuffCplt = 1;
-  }
-
-  if (((Audio_DmaDigMic1RecHalfBuffCplt != 0U) && (Audio_DmaDigMic2RecHalfBuffCplt != 0U)
-       && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC)) ||
-      ((Audio_DmaDigMic1RecHalfBuffCplt != 0U) && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC1)) ||
-      ((Audio_DmaDigMic2RecHalfBuffCplt != 0U) && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC2)))
-  {
     BSP_AUDIO_IN_HalfTransfer_CallBack(1);
-    Audio_DmaDigMic1RecHalfBuffCplt = 0;
-    Audio_DmaDigMic2RecHalfBuffCplt = 0;
   }
 }
 
@@ -1576,120 +1496,49 @@ static void MDF_ErrorCallback(MDF_HandleTypeDef *hmdf_filter)
 #else /* (USE_HAL_MDF_REGISTER_CALLBACKS == 1) */
 /**
   * @brief  MDF filter regular conversion complete callback.
-  * @param  hmdf_filter MDF filter handle.
+  * @param  hmdf MDF filter handle.
   * @retval None.
   */
-void HAL_MDF_AcqCpltCallback(MDF_HandleTypeDef *hmdf_filter)
+void HAL_MDF_AcqCpltCallback(MDF_HandleTypeDef *hmdf)
 {
-  uint32_t     index;
-  uint32_t     recbufsize = (Audio_In_Ctx[0].Size / (4U * Audio_In_Ctx[0].ChannelsNbr));
-
-  if (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC)
-  {
-    for (index = (recbufsize / 2U); index < recbufsize; index++)
-    {
-      Audio_In_Ctx[0].pBuff[2U * index] = (uint8_t)Audio_DigMic1RecBuff[index];
-      Audio_In_Ctx[0].pBuff[(2U * index) + 1U] = (uint8_t)Audio_DigMic2RecBuff[index];
-    }
-  }
-  else if (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC1)
-  {
-    for (index = (recbufsize / 2U); index < recbufsize; index++)
-    {
-      Audio_In_Ctx[0].pBuff[index] = (uint8_t)Audio_DigMic1RecBuff[index];
-    }
-  }
-  else /* Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC2 */
-  {
-    for (index = (recbufsize / 2U); index < recbufsize; index++)
-    {
-      Audio_In_Ctx[0].pBuff[index] = (uint8_t)Audio_DigMic2RecBuff[index];
-    }
-  }
-
   /* Invoke 'TransferCompete' callback function */
-  if (hmdf_filter == &haudio_in_mdf_filter[0])
+  if (hmdf == &haudio_in_mdf_filter[0])
   {
-    Audio_DmaDigMic1RecBuffCplt = 1;
+    BSP_AUDIO_IN_TransferComplete_CallBack(0);
   }
   else
   {
-    Audio_DmaDigMic2RecBuffCplt = 1;
-  }
-
-  if (((Audio_DmaDigMic1RecBuffCplt != 0U) && (Audio_DmaDigMic2RecBuffCplt != 0U)
-       && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC)) ||
-      ((Audio_DmaDigMic1RecBuffCplt != 0U) && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC1)) ||
-      ((Audio_DmaDigMic2RecBuffCplt != 0U) && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC2)))
-  {
-    BSP_AUDIO_IN_TransferComplete_CallBack(0);
-    Audio_DmaDigMic1RecBuffCplt = 0;
-    Audio_DmaDigMic2RecBuffCplt = 0;
+    BSP_AUDIO_IN_TransferComplete_CallBack(1);
   }
 }
 
 /**
   * @brief  MDF filter regular conversion half complete callback.
-  * @param  hmdf_filter MDF filter handle.
+  * @param  hmdf MDF filter handle.
   * @retval None.
   */
-void HAL_MDF_AcqHalfCpltCallback(MDF_HandleTypeDef *hmdf_filter)
+void HAL_MDF_AcqHalfCpltCallback(MDF_HandleTypeDef *hmdf)
 {
-  uint32_t     index;
-  uint32_t     recbufsize = (Audio_In_Ctx[0].Size / (4U * Audio_In_Ctx[0].ChannelsNbr));
-
-  if (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC)
+  /* Invoke 'TransferCompete' callback function */
+  if (hmdf == &haudio_in_mdf_filter[0])
   {
-    for (index = 0; index < (recbufsize / 2U); index++)
-    {
-      Audio_In_Ctx[0].pBuff[2U * index] = (uint8_t)Audio_DigMic1RecBuff[index];
-      Audio_In_Ctx[0].pBuff[(2U * index) + 1U] = (uint8_t)Audio_DigMic2RecBuff[index];
-    }
-  }
-  else if (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC1)
-  {
-    for (index = 0; index < (recbufsize / 2U); index++)
-    {
-      Audio_In_Ctx[0].pBuff[index] = (uint8_t)Audio_DigMic1RecBuff[index];
-    }
-  }
-  else /* Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC2 */
-  {
-    for (index = 0; index < (recbufsize / 2U); index++)
-    {
-      Audio_In_Ctx[0].pBuff[index] = (uint8_t)Audio_DigMic2RecBuff[index];
-    }
-  }
-
-  /* Invoke the 'HalfTransfer' callback function */
-  if (hmdf_filter == &haudio_in_mdf_filter[0])
-  {
-    Audio_DmaDigMic1RecHalfBuffCplt = 1;
+    BSP_AUDIO_IN_HalfTransfer_CallBack(0);
   }
   else
   {
-    Audio_DmaDigMic2RecHalfBuffCplt = 1;
-  }
-
-  if (((Audio_DmaDigMic1RecHalfBuffCplt != 0U) && (Audio_DmaDigMic2RecHalfBuffCplt != 0U)
-       && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC)) ||
-      ((Audio_DmaDigMic1RecHalfBuffCplt != 0U) && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC1)) ||
-      ((Audio_DmaDigMic2RecHalfBuffCplt != 0U) && (Audio_In_Ctx[0].Device == AUDIO_IN_DEVICE_DIGITAL_MIC2)))
-  {
     BSP_AUDIO_IN_HalfTransfer_CallBack(1);
-    Audio_DmaDigMic1RecHalfBuffCplt = 0;
-    Audio_DmaDigMic2RecHalfBuffCplt = 0;
   }
 }
 
+
 /**
   * @brief  MDF filter error callback.
-  * @param  hmdf_filter MDF filter handle.
+  * @param  hmdf MDF filter handle.
   * @retval None.
   */
-void HAL_MDF_ErrorCallback(MDF_HandleTypeDef *hmdf_filter)
+void HAL_MDF_ErrorCallback(MDF_HandleTypeDef *hmdf)
 {
-  UNUSED(hmdf_filter);
+  UNUSED(hmdf);
 
   BSP_AUDIO_IN_Error_CallBack(0);
 }
@@ -1714,7 +1563,7 @@ __weak HAL_StatusTypeDef MX_MDF1_ClockConfig(MDF_HandleTypeDef *hMdfBlock, uint3
     /* MDF Clock configuration:
     PLL3_VCO Input = MSI_4Mhz/PLL3M = 4 Mhz
     PLL3_VCO Output = PLL3_VCO Input * PLL3N = 320 Mhz
-    MDF_CLK_x = PLL3_VCO Output/PLL3Q = 320/28 = 11.428 Mhz */
+    MDF_CLK_x = PLL3_VCO Output/PLL3Q = 320/28 = 11,428 Mhz */
     RCC_ExCLKInitStruct.PLL3.PLL3Source = RCC_PLLSOURCE_MSI;
     RCC_ExCLKInitStruct.PLL3.PLL3M = 1;
     RCC_ExCLKInitStruct.PLL3.PLL3N = 80;
@@ -1763,7 +1612,7 @@ __weak HAL_StatusTypeDef MX_MDF1_Init(MDF_HandleTypeDef *hMdfBlock, MX_MDF_InitT
   hMdfBlock->Init.CommonParam.OutputClock.Pins               = (hMdfBlock->Instance == ADF1_Filter0)
                                                                ? MDF_OUTPUT_CLOCK_0
                                                                : MDF_OUTPUT_CLOCK_1;
-  hMdfBlock->Init.CommonParam.OutputClock.Divider            = 16U; /* MDF_CCK = 11.428MHz / 16 = 714 KHz */
+  hMdfBlock->Init.CommonParam.OutputClock.Divider            = 4U; /* MDF_CCK = 11.428MHz / 4 = 2,857 MHz */
   hMdfBlock->Init.CommonParam.OutputClock.Trigger.Activation = DISABLE;
   hMdfBlock->Init.CommonParam.OutputClock.Trigger.Source     = MDF_CLOCK_TRIG_TRGO;
   hMdfBlock->Init.CommonParam.OutputClock.Trigger.Edge       = MDF_CLOCK_TRIG_RISING_EDGE;
