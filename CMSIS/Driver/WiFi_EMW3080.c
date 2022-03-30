@@ -16,7 +16,7 @@
  * limitations under the License.
  *
  *
- * $Date:               24. March 2022
+ * $Date:               30. March 2022
  * $Revision:           V1.0
  *
  * Driver:              Driver_WiFin (n = WIFI_EMW3080_DRV_NUM value)
@@ -1439,7 +1439,7 @@ static int32_t WiFi_SocketConnect (int32_t socket, const uint8_t *ip, uint32_t i
   \brief         Receive data or check if data is available on a connected socket.
   \param[in]     socket   Socket identification number
   \param[out]    buf      Pointer to buffer where data should be stored
-  \param[in]     len      Length of buffer (in bytes), set len = 0 to check if data is available.
+  \param[in]     len      Length of buffer (in bytes), set len = 0 to check if data is available
   \return        status information
                    - number of bytes received (>=0), if len != 0
                    - 0                            : Data is available (len = 0)
@@ -1974,7 +1974,7 @@ static int32_t WiFi_SocketGetSockName (int32_t socket, uint8_t *ip, uint32_t *ip
 
 /**
   \fn            int32_t WiFi_SocketGetPeerName (int32_t socket, uint8_t *ip, uint32_t *ip_len, uint16_t *port)
-  \brief         Retrieve remote IP address and port of a socket
+  \brief         Retrieve remote IP address and port of a socket.
   \param[in]     socket   Socket identification number
   \param[out]    ip       Pointer to buffer where remote address shall be returned (NULL for none)
   \param[in,out] ip_len   Pointer to length of 'ip' (or NULL if 'ip' is NULL)
