@@ -22,18 +22,18 @@ Refer to [Configure RTX v5](https://arm-software.github.io/CMSIS_5/RTOS2/html/co
 Board: STMicroelectronics [B-U585I-IOT02A](https://www.st.com/en/evaluation-tools/b-u585i-iot02a.html)
 ------------------------------------------
 
-Device:            <b>STM32U585AII6QU</b>  
-System Core Clock: <b>160 MHz</b>  
+Device: **STM32U585AII6QU**  
+System Core Clock: **160 MHz**
 
-This setup is configured using **STM32CubeMX**, an interactive tool provided by STMicroelectronics for device configuration.  
+This setup is configured using **STM32CubeMX**, an interactive tool provided by STMicroelectronics for device configuration.
 Refer to ["Create Projects with STM32Cube HAL and STM32CubeMX"](https://www.keil.com/pack/doc/STM32Cube/html/index.html) for additional information.
 
 For **STM32CubeMX** configuration settings please refer to [STM32CubeMX Configuration](RTE/Device/STM32U585AIIx/STCubeGenerated/STCubeGenerated.pdf).
 
 The Heap/stack settings and CMSIS-Driver assignments are configured in the configuration files of respective software components.
 
-The example project can be re-configured to work on custom hardware.  
-Refer to ["Migrate STM32 Based Example Projects to Custom Hardware"](https://github.com/MDK-Packs/Documentation/tree/master/Porting_to_Custom_Hardware) for additional information. 
+The example project can be re-configured to work on custom hardware.
+Refer to ["Migrate STM32 Based Example Projects to Custom Hardware"](https://github.com/MDK-Packs/Documentation/tree/master/Porting_to_Custom_Hardware) for additional information.
 
 ### System Configuration
 

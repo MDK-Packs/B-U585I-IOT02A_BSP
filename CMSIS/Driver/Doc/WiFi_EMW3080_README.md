@@ -9,19 +9,19 @@
 
 ### Module
 
- - Firmware **v2.1.11** (for update procedure please consult 
+ - Firmware **v2.1.11** (for update procedure please consult
    [Firmware Update](https://www.st.com/en/development-tools/x-wifi-emw3080b.html) procedure)
 
 ### Limitations of the MXCHIP EMW3080B Firmware v2.1.11
 
  - Supports only SPI interface
  - Does not properly support Access Point
- - Does not detect socket connection closure by the server 
- - Does not differentiate between socket connection command failure, 
-   connection to non-existent port or connection to non-existent server 
- - Does not support dissolution of the datagram socket address 
- - Occasionally does not properly return IP and port of the received datagram 
- - Reports data sent success on socket closed by the server 
+ - Does not detect socket connection closure by the server
+ - Does not differentiate between socket connection command failure,
+   connection to non-existent port or connection to non-existent server
+ - Does not support dissolution of the datagram socket address
+ - Occasionally does not properly return IP and port of the received datagram
+ - Reports data sent success on socket closed by the server
 
 ## STM32CubeMX Setup
 
@@ -136,7 +136,7 @@ Select or enter the values that are marked in **bold**.
        :--------|:------------------|:--------------------|:----------------------------|:------------|:----------
        PD1      | SPI2_SCK          | Alternate           | No pull-up and no pull-down | High        |.
        PD3      | SPI2_MISO         | Alternate           | No pull-up and no pull-down | High        |.
-       PD4      | SPI2_MOSI         | Alternate           | No pull-up and no pull-down | High        |.  
+       PD4      | SPI2_MOSI         | Alternate           | No pull-up and no pull-down | High        |.
 
      - Under category **System Core** select **GPIO** and select **GPIO** tab and set:
        Pin Name | GPIO output level | GPIO mode           | GPIO Pull-up/Pull-down      | Maximum out | User Label
@@ -144,7 +144,7 @@ Select or enter the values that are marked in **bold**.
        PB12     | High              | Output Push Pull    | No pull-up and no pull-down | High        | **MXCHIP_NSS**
        PD14     | n/a               | Ext Int Rising edge | No pull-up and no pull-down | n/a         | **MXCHIP_NOTIFY**
        PF15     | Low               | Output Push Pull    | No pull-up and no pull-down | Low         | **MXCHIP_RESET**
-       PG15     | n/a               | Ext Int Rising edge | No pull-up and no pull-down | n/a         | **MXCHIP_FLOW**  
+       PG15     | n/a               | Ext Int Rising edge | No pull-up and no pull-down | n/a         | **MXCHIP_FLOW**
 
   5. Configure the **NVIC**
      - Under category **System Core** select **NVIC** and select **NVIC** tab and set:
@@ -166,20 +166,20 @@ Select or enter the values that are marked in **bold**.
 ### Project Manager tab
   1. Select **Advanced Settings** tab and:
      - in the **Register Callback** window change value for **SPI** to **ENABLE**
-     - if DMA is configured for SPI transfers then in the **Generated Function Calls** window, 
-       ensure that **MX_GPDMA1_Init** function is ranked higher (has lower rank number) than **MX_SPI2_Init** function  
+     - if DMA is configured for SPI transfers then in the **Generated Function Calls** window,
+       ensure that **MX_GPDMA1_Init** function is ranked higher (has lower rank number) than **MX_SPI2_Init** function
        (that means MX_GPDMA1_Init function will be called before MX_SPI2_Init function)
 
 ## Source Code Setup
 
- - Open the STM32CubeMX generated **main.c** file.  
+ - Open the STM32CubeMX generated **main.c** file.
    Add the following include into the section between `USER CODE BEGIN Includes` and `USER CODE END Includes`:
 
 ```C
 #include "WiFi_EMW3080.h"
 ```
 
- - Add code for handling External Interrupts by copy-pasting the following code snippet into the section  
+ - Add code for handling External Interrupts by copy-pasting the following code snippet into the section
    between `USER CODE BEGIN 0` and `USER CODE END 0`:
 
 ```C
@@ -199,8 +199,8 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin) {
 
 ## Driver Configuration
 
-This driver is built on top of the **MX_WIFI Component Driver**, so the configuration is also done separately in two configuration files. 
-Respectively **WiFi_EMW3080_Config.h** file is used for the CMSIS-Driver configuration and **mx_wifi_conf.h** file is used for the 
+This driver is built on top of the **MX_WIFI Component Driver**, so the configuration is also done separately in two configuration files.
+Respectively **WiFi_EMW3080_Config.h** file is used for the CMSIS-Driver configuration and **mx_wifi_conf.h** file is used for the
 MX_WIFI Component Driver configuration.
 
 ### CMSIS-Driver Configuration Settings: WiFi_EMW3080_Config.h file
@@ -216,7 +216,7 @@ MX_WIFI Component Driver configuration.
 ### MX_WIFI Component Driver Configuration Settings: mx_wifi_conf.h file
 
  - **MX_WIFI_USE_SPI** specifies SPI Interface usage. Since this Firmware only supports SPI Interface this setting must be set to **1**.
- - **MX_WIFI_SPI_NUM** specifies the SPI peripheral number. On this board SPI2 is used, so this setting should be set to **2**. 
+ - **MX_WIFI_SPI_NUM** specifies the SPI peripheral number. On this board SPI2 is used, so this setting should be set to **2**.
    If different SPI peripheral number is used this setting should be changed accordingly.
  - **MX_WIFI_SPI_DMA** specifies DMA usage for the SPI transfers. If DMA is used set this setting to **1**, otherwise set it to **0**.
  - **MX_WIFI_USE_CMSIS_OS** specifies usage of the CMSIS RTOS2. This setting must be set to **1**.
@@ -228,5 +228,5 @@ MX_WIFI Component Driver configuration.
 
 ## Driver Validation
 
-Results of the CMSIS-Driver Validation for this driver can be found in the [WiFi_EMW3080_TestReport.txt](../Validation/WiFi_EMW3080_TestReport.txt) file.  
+Results of the CMSIS-Driver Validation for this driver can be found in the [WiFi_EMW3080_TestReport.txt](../Validation/WiFi_EMW3080_TestReport.txt) file.
 The environment used for validation of the driver is described in the [WiFi_EMW3080_Environment.txt](../Validation/WiFi_EMW3080_Environment.txt) file.

@@ -23,7 +23,7 @@ well as a USB Virtual COM port bridge.
 
 # Getting started
 
-- [User manual](um2839.pdf)
+- [User manual](https://www.st.com/resource/en/user_manual/um2839-discovery-kit-for-iot-node-with-stm32u5-series-stmicroelectronics.pdf)
 
 ## ST-LINK driver installation and firmware upgrade
 
@@ -40,5 +40,6 @@ well as a USB Virtual COM port bridge.
 
 - [STM32U585AI microcontroller](https://www.st.com/en/microcontrollers-microprocessors/stm32u585ai.html)
 - [B-L475E-IOT01A board](https://www.st.com/en/evaluation-tools/B-U585I-IOT02A.html)
-- [User manual](um2839.pdf)
-- [Data brief](b-u585i-iot02a.pdf)
+- [User manual](https://www.st.com/resource/en/user_manual/um2839-discovery-kit-for-iot-node-with-stm32u5-series-stmicroelectronics.pdf)
+- [Data brief](https://www.st.com/resource/en/data_brief/b-u585i-iot02a.pdf)
+- [Schematic](https://www.st.com/resource/en/schematic_pack/mb1551-u585i-c02_schematic.pdf)
