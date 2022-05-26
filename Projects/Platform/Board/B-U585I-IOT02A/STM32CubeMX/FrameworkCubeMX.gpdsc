@@ -19,13 +19,20 @@
     <generator id="STM32CubeMX" Gvendor="STMicroelectronics" Gtool="STM32CubeMX" Gversion="4.10.0">
       <description>STM32CubeMX Environment</description>
       <select Dname="STM32U585AIIx" Dvendor="STMicroelectronics:13"/>
-      <command>$SMDK\CubeMX\STM32CubeMXLauncher</command>
-      <workingDir>$PRTE\Device\STM32U585AIIx</workingDir>
+      <workingDir>$PBoard/$B/STM32CubeMX</workingDir>               <!-- path is specified either absolute or relative to PDSC or GPDSC file -->
+      <exe>
+        <command>$SMDK/CubeMX/STM32CubeMxLauncher.exe</command>
+        <argument>$D</argument>                                     <!-- D = Device (Dname/Dvariant as configured by environment) -->
+        <argument>#P</argument>                                     <!-- Project path and project name (as configured by environment) -->
+        <argument>$SMDK/CubeMX/noTZ</argument>                      <!-- absolute or relative to ftl templates. $S = Device Family Pack base folder -->
+        <argument>$B</argument>                                     <!-- B = Board name -->
+      </exe>
       <project_files>
-        <file category="include" name="STCubeGenerated/Inc/"/>
-        <file category="source" name="STCubeGenerated/Src/main.c" />
-        <file category="header" name="STCubeGenerated/Inc/stm32u5xx_it.h"/>
-        <file category="source" name="STCubeGenerated/Src/stm32u5xx_it.c"/>
+        <file category="include" name="Inc/"/>
+        <file category="source" name="Src/main.c"/>
+        <file category="header" name="Inc/stm32u5xx_it.h"/>
+        <file category="source" name="Src/stm32u5xx_it.c"/>
+        <file category="other" name="STM32CubeMX.ioc"/>
       </project_files>
     </generator>
   </generators>
@@ -56,16 +63,17 @@
     </condition>
   </conditions>
   <components>
-    <component generator="STM32CubeMX" Cvendor="Keil" Cclass="Device" Cgroup="STM32Cube Framework" Csub="STM32CubeMX" Cversion="1.1.0" condition="STCubeMX">
+    <component generator="STM32CubeMX" Cvendor="Keil" Cclass="Device" Cgroup="STM32Cube Framework" Csub="STM32CubeMX" Cversion="2.0.0" condition="STCubeMX">
       <description>Configuration via STM32CubeMX</description>
       <RTE_Components_h>
         #define RTE_DEVICE_FRAMEWORK_CUBE_MX
       </RTE_Components_h>
       <files>
         <file category="header" name="MX_Device.h"/>
-        <file category="header" name="STCubeGenerated/Inc/stm32u5xx_hal_conf.h"/>
-        <file category="source" name="STCubeGenerated/Src/stm32u5xx_hal_msp.c"/>
+        <file category="header" name="Inc/stm32u5xx_hal_conf.h"/>
+        <file category="source" name="Src/stm32u5xx_hal_msp.c"/>
       </files>
     </component>
   </components>
 </package>
+
