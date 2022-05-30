@@ -7,7 +7,7 @@
   <repository type="git">https://github.com/MDK-Packs/B-U585I-IOT02A_BSP.git</repository>
 
   <releases>
-    <release version="1.0.0">
+    <release version="1.0.0" date="2022-05-30">
       Board description and documentation for B-U585I-IOT02A
       Synchronized with STM32CubeU5 Firmware Package version V1.1.0
       Drivers:
