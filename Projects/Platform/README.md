@@ -28,7 +28,7 @@ System Core Clock: **160 MHz**
 This setup is configured using **STM32CubeMX**, an interactive tool provided by STMicroelectronics for device configuration.
 Refer to ["Create Projects with STM32Cube HAL and STM32CubeMX"](https://www.keil.com/pack/doc/STM32Cube/html/index.html) for additional information.
 
-For **STM32CubeMX** configuration settings please refer to [STM32CubeMX Configuration](RTE/Device/STM32U585AIIx/STCubeGenerated/STCubeGenerated.pdf).
+For **STM32CubeMX** configuration settings please refer to [STM32CubeMX Configuration](Board/B-U585I-IOT02A/STM32CubeMX/STCubeGenerated.pdf).
 
 The Heap/stack settings and CMSIS-Driver assignments are configured in the configuration files of respective software components.
 
