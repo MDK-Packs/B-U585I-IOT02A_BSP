@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd" schemaVersion="1.7.2">
+<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd" schemaVersion="1.7.7">
   <name>B-U585I-IOT02A_BSP</name>
   <vendor>Keil</vendor>
   <description>STMicroelectronics STM32U5 Series B-U585I-IOT02A Board Support Pack</description>
@@ -7,6 +7,11 @@
   <repository type="git">https://github.com/MDK-Packs/B-U585I-IOT02A_BSP.git</repository>
 
   <releases>
+    <release version="1.0.1-dev0">
+      Drivers:
+      - CMSIS-Driver VIO:
+      -- Correct variables initialization to avoid compiler warnings
+    </release>
     <release version="1.0.0" date="2022-05-30">
       Board description and documentation for B-U585I-IOT02A
       Synchronized with STM32CubeU5 Firmware Package version V1.1.0
