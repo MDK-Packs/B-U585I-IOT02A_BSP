@@ -7,6 +7,13 @@
   <repository type="git">https://github.com/MDK-Packs/B-U585I-IOT02A_BSP.git</repository>
 
   <releases>
+    <release version="1.0.1-dev1">
+      Example projects:
+      - CMSIS-RTOS2 Blinky:
+      -- Update CubeMx configuration
+      - CMSIS-RTOS2 Platform:
+      -- Update CubeMx configuration
+    </release>
     <release version="1.0.1-dev0">
       Drivers:
       - CMSIS-Driver VIO:

@@ -1,5 +1,6 @@
 /*---------------------------------------------------------------------------
- * Copyright (c) 2021 Arm Limited (or its affiliates). All rights reserved.
+ * Copyright (c) 2021-2023 Arm Limited (or its affiliates).
+ * All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -22,25 +23,32 @@
 
 #include "main.h"
 
-#include "cmsis_os2.h"
+#include "cmsis_os2.h"                  // ::CMSIS:RTOS2
 
+extern             void app_initialize (void);
+static __NO_RETURN void app_main       (void *argument);
+
+// Main stack size must be multiple of 8 Bytes
+#define APP_MAIN_STK_SZ (4096U)
+static uint64_t app_main_stk[APP_MAIN_STK_SZ / 8];
 static const osThreadAttr_t app_main_attr = {
-  .stack_size = 4096U
+  .stack_mem  = &app_main_stk[0],
+  .stack_size = sizeof(app_main_stk)
 };
-
-/*---------------------------------------------------------------------------
- * Application main thread
- *---------------------------------------------------------------------------*/
-static void app_main (void *argument) {
-  (void)argument;
-
-  // Add user code here:
-  for (;;) {}
-}
 
 /*---------------------------------------------------------------------------
  * Application initialization
  *---------------------------------------------------------------------------*/
 void app_initialize (void) {
   osThreadNew(app_main, NULL, &app_main_attr);
+}
+
+/*---------------------------------------------------------------------------
+ * Application main thread
+ *---------------------------------------------------------------------------*/
+static __NO_RETURN void app_main (void *argument) {
+  (void)argument;
+
+  // Add user code here:
+  for (;;) {}
 }
