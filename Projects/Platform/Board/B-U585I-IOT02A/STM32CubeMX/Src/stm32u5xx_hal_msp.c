@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2022 STMicroelectronics.
+  * Copyright (c) 2023 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -84,6 +84,78 @@ void HAL_MspInit(void)
   /* USER CODE BEGIN MspInit 1 */
 
   /* USER CODE END MspInit 1 */
+}
+
+/**
+* @brief ADC MSP Initialization
+* This function configures the hardware resources used in this example
+* @param hadc: ADC handle pointer
+* @retval None
+*/
+void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  if(hadc->Instance==ADC4)
+  {
+  /* USER CODE BEGIN ADC4_MspInit 0 */
+
+  /* USER CODE END ADC4_MspInit 0 */
+
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADCDAC;
+    PeriphClkInit.AdcDacClockSelection = RCC_ADCDACCLKSOURCE_HSI;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    /* Peripheral clock enable */
+    __HAL_RCC_ADC4_CLK_ENABLE();
+
+    __HAL_RCC_GPIOF_CLK_ENABLE();
+    /**ADC4 GPIO Configuration
+    PF14     ------> ADC4_IN5
+    */
+    GPIO_InitStruct.Pin = USB_VBUS_SENSE_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(USB_VBUS_SENSE_GPIO_Port, &GPIO_InitStruct);
+
+  /* USER CODE BEGIN ADC4_MspInit 1 */
+
+  /* USER CODE END ADC4_MspInit 1 */
+  }
+
+}
+
+/**
+* @brief ADC MSP De-Initialization
+* This function freeze the hardware resources used in this example
+* @param hadc: ADC handle pointer
+* @retval None
+*/
+void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
+{
+  if(hadc->Instance==ADC4)
+  {
+  /* USER CODE BEGIN ADC4_MspDeInit 0 */
+
+  /* USER CODE END ADC4_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_ADC4_CLK_DISABLE();
+
+    /**ADC4 GPIO Configuration
+    PF14     ------> ADC4_IN5
+    */
+    HAL_GPIO_DeInit(USB_VBUS_SENSE_GPIO_Port, USB_VBUS_SENSE_Pin);
+
+  /* USER CODE BEGIN ADC4_MspDeInit 1 */
+
+  /* USER CODE END ADC4_MspDeInit 1 */
+  }
+
 }
 
 /**
@@ -194,7 +266,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     */
     GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_8;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -227,7 +299,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     */
     GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF4_I2C2;
     HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
@@ -292,6 +364,8 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 
 }
 
+static uint32_t HAL_RCC_OSPIM_CLK_ENABLED=0;
+
 /**
 * @brief OSPI MSP Initialization
 * This function configures the hardware resources used in this example
@@ -318,6 +392,10 @@ void HAL_OSPI_MspInit(OSPI_HandleTypeDef* hospi)
     }
 
     /* Peripheral clock enable */
+    HAL_RCC_OSPIM_CLK_ENABLED++;
+    if(HAL_RCC_OSPIM_CLK_ENABLED==1){
+      __HAL_RCC_OSPIM_CLK_ENABLE();
+    }
     __HAL_RCC_OSPI1_CLK_ENABLE();
 
     __HAL_RCC_GPIOI_CLK_ENABLE();
@@ -409,6 +487,10 @@ void HAL_OSPI_MspInit(OSPI_HandleTypeDef* hospi)
     }
 
     /* Peripheral clock enable */
+    HAL_RCC_OSPIM_CLK_ENABLED++;
+    if(HAL_RCC_OSPIM_CLK_ENABLED==1){
+      __HAL_RCC_OSPIM_CLK_ENABLE();
+    }
     __HAL_RCC_OSPI2_CLK_ENABLE();
 
     __HAL_RCC_GPIOI_CLK_ENABLE();
@@ -470,6 +552,10 @@ void HAL_OSPI_MspDeInit(OSPI_HandleTypeDef* hospi)
 
   /* USER CODE END OCTOSPI1_MspDeInit 0 */
     /* Peripheral clock disable */
+    HAL_RCC_OSPIM_CLK_ENABLED--;
+    if(HAL_RCC_OSPIM_CLK_ENABLED==0){
+      __HAL_RCC_OSPIM_CLK_DISABLE();
+    }
     __HAL_RCC_OSPI1_CLK_DISABLE();
 
     /**OCTOSPI1 GPIO Configuration
@@ -509,6 +595,10 @@ void HAL_OSPI_MspDeInit(OSPI_HandleTypeDef* hospi)
 
   /* USER CODE END OCTOSPI2_MspDeInit 0 */
     /* Peripheral clock disable */
+    HAL_RCC_OSPIM_CLK_ENABLED--;
+    if(HAL_RCC_OSPIM_CLK_ENABLED==0){
+      __HAL_RCC_OSPIM_CLK_DISABLE();
+    }
     __HAL_RCC_OSPI2_CLK_DISABLE();
 
     /**OCTOSPI2 GPIO Configuration
@@ -592,7 +682,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     handle_GPDMA1_Channel3.Init.Priority = DMA_LOW_PRIORITY_HIGH_WEIGHT;
     handle_GPDMA1_Channel3.Init.SrcBurstLength = 1;
     handle_GPDMA1_Channel3.Init.DestBurstLength = 1;
-    handle_GPDMA1_Channel3.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT1;
+    handle_GPDMA1_Channel3.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT0;
     handle_GPDMA1_Channel3.Init.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
     handle_GPDMA1_Channel3.Init.Mode = DMA_NORMAL;
     if (HAL_DMA_Init(&handle_GPDMA1_Channel3) != HAL_OK)
@@ -619,7 +709,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     handle_GPDMA1_Channel2.Init.Priority = DMA_LOW_PRIORITY_HIGH_WEIGHT;
     handle_GPDMA1_Channel2.Init.SrcBurstLength = 1;
     handle_GPDMA1_Channel2.Init.DestBurstLength = 1;
-    handle_GPDMA1_Channel2.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT1;
+    handle_GPDMA1_Channel2.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT1|DMA_DEST_ALLOCATED_PORT1;
     handle_GPDMA1_Channel2.Init.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
     handle_GPDMA1_Channel2.Init.Mode = DMA_NORMAL;
     if (HAL_DMA_Init(&handle_GPDMA1_Channel2) != HAL_OK)
@@ -685,7 +775,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     handle_GPDMA1_Channel5.Init.Priority = DMA_LOW_PRIORITY_HIGH_WEIGHT;
     handle_GPDMA1_Channel5.Init.SrcBurstLength = 1;
     handle_GPDMA1_Channel5.Init.DestBurstLength = 1;
-    handle_GPDMA1_Channel5.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT1;
+    handle_GPDMA1_Channel5.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT0;
     handle_GPDMA1_Channel5.Init.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
     handle_GPDMA1_Channel5.Init.Mode = DMA_NORMAL;
     if (HAL_DMA_Init(&handle_GPDMA1_Channel5) != HAL_OK)
@@ -712,7 +802,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     handle_GPDMA1_Channel4.Init.Priority = DMA_LOW_PRIORITY_HIGH_WEIGHT;
     handle_GPDMA1_Channel4.Init.SrcBurstLength = 1;
     handle_GPDMA1_Channel4.Init.DestBurstLength = 1;
-    handle_GPDMA1_Channel4.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT1;
+    handle_GPDMA1_Channel4.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT1|DMA_DEST_ALLOCATED_PORT1;
     handle_GPDMA1_Channel4.Init.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
     handle_GPDMA1_Channel4.Init.Mode = DMA_NORMAL;
     if (HAL_DMA_Init(&handle_GPDMA1_Channel4) != HAL_OK)
@@ -875,6 +965,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
     GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    /* USART1 interrupt Init */
+    HAL_NVIC_SetPriority(USART1_IRQn, 8, 0);
+    HAL_NVIC_EnableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspInit 1 */
 
   /* USER CODE END USART1_MspInit 1 */
@@ -961,6 +1054,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
     */
     HAL_GPIO_DeInit(GPIOA, T_VCP_RX_Pin|T_VCP_TX_Pin);
 
+    /* USART1 interrupt DeInit */
+    HAL_NVIC_DisableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspDeInit 1 */
 
   /* USER CODE END USART1_MspDeInit 1 */
@@ -1018,10 +1113,10 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef* hpcd)
     PA12     ------> USB_OTG_FS_DP
     PA11     ------> USB_OTG_FS_DM
     */
-    GPIO_InitStruct.Pin = USB_C_P_Pin|USB_C_PA11_Pin;
+    GPIO_InitStruct.Pin = USB_C_P_Pin|USB_C_N_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF10_USB;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -1066,7 +1161,7 @@ void HAL_PCD_MspDeInit(PCD_HandleTypeDef* hpcd)
     PA12     ------> USB_OTG_FS_DP
     PA11     ------> USB_OTG_FS_DM
     */
-    HAL_GPIO_DeInit(GPIOA, USB_C_P_Pin|USB_C_PA11_Pin);
+    HAL_GPIO_DeInit(GPIOA, USB_C_P_Pin|USB_C_N_Pin);
 
   /* USER CODE BEGIN USB_OTG_FS_MspDeInit 1 */
 
