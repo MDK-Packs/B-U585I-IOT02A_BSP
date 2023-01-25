@@ -31,7 +31,7 @@ static osThreadId_t tid_thrButton;      // Thread id of thread: Button
 
 static __NO_RETURN void thrLED    (void *argument);
 static __NO_RETURN void thrButton (void *argument);
-static __NO_RETURN void app_main  (void *argument);
+static             void app_main  (void *argument);
 
 /*---------------------------------------------------------------------------
   thrLED: blink LED
@@ -94,7 +94,7 @@ void app_initialize (void) {
 /*---------------------------------------------------------------------------
  * Application main thread
  *---------------------------------------------------------------------------*/
-static __NO_RETURN void app_main (void *argument) {
+static void app_main (void *argument) {
   (void)argument;
 
   tid_thrLED = osThreadNew(thrLED, NULL, NULL);         // Create LED thread
