@@ -1,5 +1,6 @@
 /*---------------------------------------------------------------------------
- * Copyright (c) 2020 Arm Limited (or its affiliates). All rights reserved.
+ * Copyright (c) 2020-2023 Arm Limited (or its affiliates).
+ * All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -28,13 +29,17 @@
 static osThreadId_t tid_thrLED;         // Thread id of thread: LED
 static osThreadId_t tid_thrButton;      // Thread id of thread: Button
 
+static __NO_RETURN void thrLED    (void *argument);
+static __NO_RETURN void thrButton (void *argument);
+static             void app_main  (void *argument);
+
 /*---------------------------------------------------------------------------
   thrLED: blink LED
  *---------------------------------------------------------------------------*/
-__NO_RETURN static void thrLED (void *arg) {
+static __NO_RETURN void thrLED (void *argument) {
   uint32_t active_flag = 0U;
 
-  (void)arg;
+  (void)argument;
 
   for (;;) {
     if (osThreadFlagsWait(1U, osFlagsWaitAny, 0U) == 1U) {
@@ -61,11 +66,11 @@ __NO_RETURN static void thrLED (void *arg) {
 /*---------------------------------------------------------------------------
   thrButton: check Button state
  *---------------------------------------------------------------------------*/
-__NO_RETURN static void thrButton (void *arg) {
+static __NO_RETURN void thrButton (void *argument) {
   uint32_t last = 0U;
   uint32_t state;
 
-  (void)arg;
+  (void)argument;
 
   for (;;) {
     state = (vioGetSignal(vioBUTTON0));           // Get pressed Button state
@@ -77,6 +82,13 @@ __NO_RETURN static void thrButton (void *arg) {
     }
     osDelay(100U);
   }
+}
+
+/*---------------------------------------------------------------------------
+ * Application initialization
+ *---------------------------------------------------------------------------*/
+void app_initialize (void) {
+  osThreadNew(app_main, NULL, NULL);
 }
 
 /*---------------------------------------------------------------------------
@@ -92,11 +104,4 @@ static void app_main (void *argument) {
   if (tid_thrButton == NULL) { /* add error handling */ }
 
   osThreadExit();
-}
-
-/*---------------------------------------------------------------------------
- * Application initialization
- *---------------------------------------------------------------------------*/
-void app_initialize (void) {
-  osThreadNew(app_main, NULL, NULL);
 }

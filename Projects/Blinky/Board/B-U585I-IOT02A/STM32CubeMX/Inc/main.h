@@ -31,7 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+extern void app_initialize (void);
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

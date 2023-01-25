@@ -25,8 +25,7 @@
 
 #include "cmsis_os2.h"                  // ::CMSIS:RTOS2
 
-extern             void app_initialize (void);
-static __NO_RETURN void app_main       (void *argument);
+static __NO_RETURN void app_main (void *argument);
 
 // Main stack size must be multiple of 8 Bytes
 #define APP_MAIN_STK_SZ (4096U)
