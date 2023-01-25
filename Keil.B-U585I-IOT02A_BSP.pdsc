@@ -10,9 +10,11 @@
     <release version="1.0.1-dev1">
       Example projects:
       - CMSIS-RTOS2 Blinky:
-      -- Update CubeMx configuration
+      -- Update CubeMx configuration to latest CubeMx
       - CMSIS-RTOS2 Platform:
-      -- Update CubeMx configuration
+      -- Update CubeMx configuration to latest CubeMx
+      -- Enable USB Device driver, USB PD BSP driver and necessary components
+      -- Enable Environmental Sensors BSP driver and necessary components
     </release>
     <release version="1.0.1-dev0">
       Drivers:

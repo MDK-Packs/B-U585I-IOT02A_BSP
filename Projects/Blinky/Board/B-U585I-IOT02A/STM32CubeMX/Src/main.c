@@ -21,19 +21,19 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
 #include "RTE_Components.h"
 
-#ifdef    RTE_CMSIS_RTOS2
 #include "cmsis_os2.h"
-#endif
+
 #ifdef    RTE_VIO_BOARD
 #include "cmsis_vio.h"
 #endif
+
 #ifdef    RTE_Compiler_EventRecorder
 #include "EventRecorder.h"
 #endif
 
-extern void app_initialize (void);
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

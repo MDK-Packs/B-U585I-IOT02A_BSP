@@ -1,6 +1,6 @@
 Configuration	STM32CubeMX
 STM32CubeMX 	6.7.0
-Date	01/24/2023
+Date	01/25/2023
 MCU	STM32U585AIIxQ
 
 
@@ -45,6 +45,7 @@ PWR:Low Power	Power saving mode	PWR_VS_LPOM	VP_PWR_VS_LPOM
 PWR:Security/Privilege attributes	Privilege attributes	PWR_VS_SECSignals	VP_PWR_VS_SECSignals
 RCC	Crystal/Ceramic Resonator	RCC_OSC32_IN	PC14-OSC32_IN (PC14)
 RCC	Crystal/Ceramic Resonator	RCC_OSC32_OUT	PC15-OSC32_OUT (PC15)
+RTC	Activate RTC Clock Source	RTC_VS_RTC_Activate	VP_RTC_VS_RTC_Activate
 SPI1	Full-Duplex Master	SPI1_MISO	PE14
 SPI1	Full-Duplex Master	SPI1_MOSI	PE15
 SPI1	Full-Duplex Master	SPI1_SCK	PE13
@@ -178,6 +179,7 @@ PWR:Low Power	Power saving mode	PWR_VS_LPOM	VP_PWR_VS_LPOM
 PWR:Security/Privilege attributes	Privilege attributes	PWR_VS_SECSignals	VP_PWR_VS_SECSignals
 RCC	Crystal/Ceramic Resonator	RCC_OSC32_IN	PC14-OSC32_IN (PC14)
 RCC	Crystal/Ceramic Resonator	RCC_OSC32_OUT	PC15-OSC32_OUT (PC15)
+RTC	Activate RTC Clock Source	RTC_VS_RTC_Activate	VP_RTC_VS_RTC_Activate
 SPI1	Full-Duplex Master	SPI1_MISO	PE14
 SPI1	Full-Duplex Master	SPI1_MOSI	PE15
 SPI1	Full-Duplex Master	SPI1_SCK	PE13

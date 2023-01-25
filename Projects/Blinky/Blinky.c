@@ -1,5 +1,6 @@
 /*---------------------------------------------------------------------------
- * Copyright (c) 2020 Arm Limited (or its affiliates). All rights reserved.
+ * Copyright (c) 2020-2023 Arm Limited (or its affiliates).
+ * All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -27,6 +28,8 @@
 
 static osThreadId_t tid_thrLED;         // Thread id of thread: LED
 static osThreadId_t tid_thrButton;      // Thread id of thread: Button
+
+static __NO_RETURN void app_main (void *argument);
 
 /*---------------------------------------------------------------------------
   thrLED: blink LED
@@ -80,9 +83,16 @@ __NO_RETURN static void thrButton (void *arg) {
 }
 
 /*---------------------------------------------------------------------------
+ * Application initialization
+ *---------------------------------------------------------------------------*/
+void app_initialize (void) {
+  osThreadNew(app_main, NULL, NULL);
+}
+
+/*---------------------------------------------------------------------------
  * Application main thread
  *---------------------------------------------------------------------------*/
-static void app_main (void *argument) {
+static __NO_RETURN void app_main (void *argument) {
   (void)argument;
 
   tid_thrLED = osThreadNew(thrLED, NULL, NULL);         // Create LED thread
@@ -92,11 +102,4 @@ static void app_main (void *argument) {
   if (tid_thrButton == NULL) { /* add error handling */ }
 
   osThreadExit();
-}
-
-/*---------------------------------------------------------------------------
- * Application initialization
- *---------------------------------------------------------------------------*/
-void app_initialize (void) {
-  osThreadNew(app_main, NULL, NULL);
 }
