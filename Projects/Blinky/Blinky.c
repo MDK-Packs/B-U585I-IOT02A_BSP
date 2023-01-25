@@ -29,15 +29,17 @@
 static osThreadId_t tid_thrLED;         // Thread id of thread: LED
 static osThreadId_t tid_thrButton;      // Thread id of thread: Button
 
-static __NO_RETURN void app_main (void *argument);
+static __NO_RETURN void thrLED    (void *argument);
+static __NO_RETURN void thrButton (void *argument);
+static __NO_RETURN void app_main  (void *argument);
 
 /*---------------------------------------------------------------------------
   thrLED: blink LED
  *---------------------------------------------------------------------------*/
-__NO_RETURN static void thrLED (void *arg) {
+static __NO_RETURN void thrLED (void *argument) {
   uint32_t active_flag = 0U;
 
-  (void)arg;
+  (void)argument;
 
   for (;;) {
     if (osThreadFlagsWait(1U, osFlagsWaitAny, 0U) == 1U) {
@@ -64,11 +66,11 @@ __NO_RETURN static void thrLED (void *arg) {
 /*---------------------------------------------------------------------------
   thrButton: check Button state
  *---------------------------------------------------------------------------*/
-__NO_RETURN static void thrButton (void *arg) {
+static __NO_RETURN void thrButton (void *argument) {
   uint32_t last = 0U;
   uint32_t state;
 
-  (void)arg;
+  (void)argument;
 
   for (;;) {
     state = (vioGetSignal(vioBUTTON0));           // Get pressed Button state
