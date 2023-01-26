@@ -1,0 +1,79 @@
+﻿;------------------------------------------------------------------------------
+; Copyright © 2019-2023 Arm Limited (or its affiliates). All rights reserved.
+; Communication Device Class driver installation file
+;------------------------------------------------------------------------------
+
+;------------------------------------------------------------------------------
+; Header \ Description
+;------------------------------------------------------------------------------
+[Version]
+Signature   = "$Windows NT$"
+Class       = Ports
+ClassGuid   = {4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider    = %Manufacturer%
+DriverVer   = 07/10/2019,1.0.0.0
+CatalogFile = b-u585i-iot02a-vcom.cat
+
+;------------------------------------------------------------------------------
+; Manufacturer/Models sections
+;------------------------------------------------------------------------------
+[Manufacturer]
+%Manufacturer% = DeviceList, NTx86, NTamd64
+
+;------------------------------------------------------------------------------
+; Decoration for x86 architecture
+;------------------------------------------------------------------------------
+[DeviceList.NTx86]
+%DESCRIPTION% = B_U585I_IOT02A_USB, USB\VID_c251&PID_5905
+%COMPOSITE0%  = B_U585I_IOT02A_USB, USB\VID_c251&PID_5905&MI_00
+%COMPOSITE2%  = B_U585I_IOT02A_USB, USB\VID_c251&PID_5905&MI_02
+
+;------------------------------------------------------------------------------
+; Decoration for x64 architecture
+;------------------------------------------------------------------------------
+[DeviceList.NTamd64]
+%DESCRIPTION% = B_U585I_IOT02A_USB, USB\VID_c251&PID_5905
+%COMPOSITE0%  = B_U585I_IOT02A_USB, USB\VID_c251&PID_5905&MI_00
+%COMPOSITE2%  = B_U585I_IOT02A_USB, USB\VID_c251&PID_5905&MI_02
+
+;------------------------------------------------------------------------------
+; Installation
+;------------------------------------------------------------------------------
+[SourceDisksFiles]
+
+[SourceDisksNames]
+
+[DestinationDirs]
+FakeModemCopyFileSection=12
+DefaultDestDir=12
+[FakeModemCopyFileSection]
+
+[B_U585I_IOT02A_USB]
+include=mdmcpq.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=B_U585I_IOT02A_USB.AddReg
+
+[B_U585I_IOT02A_USB.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,usbser.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[B_U585I_IOT02A_USB.Services]
+AddService=usbser, 0x00000002, DriverService
+
+[DriverService]
+DisplayName=%DRIVER.SVC%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\usbser.sys
+
+;------------------------------------------------------------------------------
+; String Definitions
+;------------------------------------------------------------------------------
+[Strings]
+Manufacturer = "Arm Limited"
+DRIVER.SVC   = "B-U585I-IOT02A USB VCOM Driver"
+DESCRIPTION  = "B-U585I-IOT02A USB VCOM Port"
+COMPOSITE0   = "B-U585I-IOT02A USB VCOM Port"
+COMPOSITE2   = "B-U585I-IOT02A USB VCOM Port"
