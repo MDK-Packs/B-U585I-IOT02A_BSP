@@ -1,0 +1,26 @@
+This is an Mass Storage example that demonstrates Mass Storage Class (MSC)
+on USB Device.
+
+Detailed description is available on:
+www.keil.com/pack/doc/MW/USB/html/dev_msc_tutorial.html
+
+Board:                          STM         'B-U585I-IOT02A'
+Microcontroller:                STM         'STM32U585AII6QU'
+Clock Settings:                 CPU clock    160 MHz
+                                USB clock     48 MHz
+USB Full-speed:                 OTG_FS (connector CN1 - USB Type-C)
+Storage Media:                  RAM memory
+
+The program is available in different targets:
+
+ - Debug:
+   - Compiler:                  ARM Compiler optimization Level 1
+   - Compiler:Event Recorder:   Enabled
+   - CMSIS:RTOS2:Keil RTX5:     Source
+   - USB:CORE:                  Debug
+
+ - Release:
+   - Compiler:                  ARM Compiler optimization Level 3
+   - Compiler:Event Recorder:   Disabled
+   - CMSIS:RTOS2:Keil RTX5:     Library
+   - USB:CORE:                  Release

@@ -7,6 +7,13 @@
   <repository type="git">https://github.com/MDK-Packs/B-U585I-IOT02A_BSP.git</repository>
 
   <releases>
+    <release version="1.1.0-dev0">
+      Middleware examples:
+      - Add USB Device: HID, Mass Storage and Virtual COM examples
+      - Add USB Host: Keyboard and Mass Storage examples
+      Board drivers:
+      - Update requirements for USB Power Delivery driver
+    </release>
     <release version="1.0.1-dev1">
       Example projects:
       - CMSIS-RTOS2 Blinky:
@@ -134,7 +141,9 @@
     <condition id="B-U585I-IOT02A BSP USB PD">
       <description>STMicroelectronics B-U585I-IOT02A BSP USB PD</description>
       <require condition="STM32U585"/>
+      <require Cclass="Device"        Cgroup="STM32Cube HAL" Csub="ADC"/>
       <require Cclass="Board Support" Cgroup="Drivers"       Csub="Basic I/O"/>
+      <require Cclass="Board Support" Cgroup="Drivers"       Csub="BUS"/>
       <require Cclass="Board Support" Cgroup="Components"    Csub="TCPP0203"/>
     </condition>
     <condition id="B-U585I-IOT02A BSP APS6408">
@@ -492,6 +501,76 @@
         <component Cclass="CMSIS Driver" Cgroup="VIO"/>
         <component Cclass="CMSIS Driver" Cgroup="WiFi"/>
         <category>Getting Started</category>
+      </attributes>
+    </example>
+
+    <example name="USB Device HID" doc="Abstract.txt" folder="Projects/Middleware/USB/Device/HID">
+      <description>USB Human Interface Device providing access from PC to board LEDs and push buttons</description>
+      <board name="B-U585I-IOT02A" vendor="STMicroelectronics"/>
+      <project>
+        <environment name="uv" load="HID.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="USB" Cgroup="Device" Csub="HID"/>
+        <category>Middleware</category>
+        <category>USB Device</category>
+        <keyword>HID</keyword>
+      </attributes>
+    </example>
+
+    <example name="USB Device Mass Storage" doc="Abstract.txt" folder="Projects/Middleware/USB/Device/MassStorage">
+      <description>USB Mass Storage Device using RAM as storage media</description>
+      <board name="B-U585I-IOT02A" vendor="STMicroelectronics"/>
+      <project>
+        <environment name="uv" load="MassStorage.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="USB" Cgroup="Device" Csub="MSC"/>
+        <category>Middleware</category>
+        <category>USB Device</category>
+        <keyword>Memory Disk</keyword>
+      </attributes>
+    </example>
+
+    <example name="USB Device Virtual COM" doc="Abstract.txt" folder="Projects/Middleware/USB/Device/VirtualCOM">
+      <description>Bridge between PC USB Virtual COM Port and UART port (ST-Link Virtual COM Port)</description>
+      <board name="B-U585I-IOT02A" vendor="STMicroelectronics"/>
+      <project>
+        <environment name="uv" load="VirtualCOM.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="USB" Cgroup="Device" Csub="CDC"/>
+        <category>Middleware</category>
+        <category>USB Device</category>
+        <keyword>Virtual COM</keyword>
+      </attributes>
+    </example>
+
+    <example name="USB Host Mass Storage" doc="Abstract.txt" folder="Projects/Middleware/USB/Host/MassStorage">
+      <description>Simple Mass Storage example showing file access on the USB Memory Device</description>
+      <board name="B-U585I-IOT02A" vendor="STMicroelectronics"/>
+      <project>
+        <environment name="uv" load="MassStorage.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="USB" Cgroup="Host" Csub="MSC"/>
+        <category>Middleware</category>
+        <category>USB Host</category>
+        <keyword>Mass Storage</keyword>
+      </attributes>
+    </example>
+
+    <example name="USB Host Keyboard" doc="Abstract.txt" folder="Projects/Middleware/USB/Host/Keyboard">
+      <description>Simple example using USB Keyboard as input User Interface</description>
+      <board name="B-U585I-IOT02A" vendor="STMicroelectronics"/>
+      <project>
+        <environment name="uv" load="Keyboard.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="USB" Cgroup="Host" Csub="HID"/>
+        <category>Middleware</category>
+        <category>USB Host</category>
+        <keyword>Keyboard</keyword>
       </attributes>
     </example>
   </examples>
