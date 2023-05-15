@@ -7,6 +7,10 @@
   <repository type="git">https://github.com/MDK-Packs/B-U585I-IOT02A_BSP.git</repository>
 
   <releases>
+    <release version="1.1.0-dev1">
+      Pack Description:
+      - Add external memory information
+    </release>
     <release version="1.1.0-dev0">
       Middleware examples:
       - Add USB Device: HID, Mass Storage and Virtual COM examples
@@ -442,6 +446,8 @@
       <book category="other"     name="Documents/README.md"                                        title="Guide"              public="true"/>
       <mountedDevice    deviceIndex="0" Dvendor="STMicroelectronics:13" Dname="STM32U585AIIx"/>
       <compatibleDevice deviceIndex="0" Dvendor="STMicroelectronics:13" DsubFamily="STM32U585"/>
+      <memory name="RAM-External"   access="rwx" start="0x90000000" size="0x00800000"/>
+      <memory name="Flash-External" access="rx"  start="0x70000000" size="0x04000000"/>
       <feature type="ODbg"          n="1"                name="On-board ST-LINK-V3E"/>
       <feature type="ROM"           n="1"                name="512-Mbit Octal-SPI Flash memory"/>
       <feature type="RAM"           n="1"                name="64-Mbit octal-SPI PSRAM"/>
