@@ -634,19 +634,19 @@
         </targetInfos>
       </component>
       <component Capiversion="2.1.0" Cclass="CMSIS Driver" Cgroup="SPI" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 CMSIS_Driver SPI">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Capiversion="2.1.0" Cclass="CMSIS Driver" Cgroup="USART" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 CMSIS_Driver USART">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Capiversion="2.1.0" Cclass="CMSIS Driver" Cgroup="USART" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 CMSIS_Driver USART">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
       <component Capiversion="2.3.0" Cclass="CMSIS Driver" Cgroup="USB Device" Csub="Full-speed" Cvendor="Keil" Cversion="1.0.0" condition="STM32U5 CMSIS_Driver USBD">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
@@ -663,182 +663,182 @@
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="ADC" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL DMA">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="ADC" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL DMA">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Common" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL Common">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Common" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL Common">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Cortex" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Cortex" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="DMA" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="DMA" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="EXTI" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="EXTI" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Flash" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Flash" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="GPIO" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="GPIO" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="HCD" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="HCD" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="I2C" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL DMA">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="I2C" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL DMA">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="ICACHE" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL DMA">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="ICACHE" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL DMA">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="IRDA" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL DMA">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="IRDA" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL DMA">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="MDF" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="MDF" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="OSPI" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL DMA DLYB">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="OSPI" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL DMA DLYB">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="PCD" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="PCD" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="PWR" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="PWR" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="RCC" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL GPIO Flash">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="RCC" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL GPIO Flash">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="RNG" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="RNG" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="RTC" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="RTC" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="SPI" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL DMA">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="SPI" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL DMA">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Smartcard" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL DMA">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Smartcard" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL DMA">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="UART" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL DMA">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="UART" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL DMA">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="USART" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 HAL DMA">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="USART" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 HAL DMA">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="Common" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 LL Common">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="Common" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 LL Common">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="DLYB" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 LL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="DLYB" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 LL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="GPIO" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 LL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="GPIO" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 LL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="PWR" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 LL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="PWR" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 LL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="RCC" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 LL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="RCC" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 LL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="UCPD" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 LL">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="UCPD" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 LL">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="UTILS" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="STM32Cube LL" Csub="UTILS" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 CMSIS">
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+      <component Cclass="Device" Cgroup="Startup" Cvariant="Source ASM" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 CMSIS">
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
@@ -893,26 +893,26 @@
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </file>
-      <file attr="config" category="source" condition="STM32U585 ARMCC" name="Drivers\CMSIS\Device\ST\STM32U5xx\Source\Templates\arm\startup_stm32u585xx.s" version="1.1.0">
+      <file attr="config" category="source" condition="STM32U585 ARMCC" name="MDK\Device\Source\arm\startup_stm32u585xx.s" version="2.0.0">
         <instance index="0">RTE\Device\STM32U585AIIx\startup_stm32u585xx.s</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 CMSIS"/>
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+        <component Cclass="Device" Cgroup="Startup" Cvariant="Source ASM" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 CMSIS" isDefaultVariant="1"/>
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </file>
-      <file attr="config" category="linkerScript" condition="STM32U585xx noTZ ARMCC" name="Drivers\CMSIS\Device\ST\STM32U5xx\Source\Templates\arm\linker\stm32u585xx_flash.sct" version="1.0.0">
+      <file attr="config" category="linkerScript" condition="STM32U585 noTZ ARMCC" name="MDK\Device\Source\arm\linker\stm32u585xx_flash.sct" version="2.0.0">
         <instance index="0">RTE\Device\STM32U585AIIx\stm32u585xx_flash.sct</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 CMSIS"/>
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+        <component Cclass="Device" Cgroup="Startup" Cvariant="Source ASM" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 CMSIS" isDefaultVariant="1"/>
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>
       </file>
-      <file attr="config" category="source" condition="noTZ" name="Drivers\CMSIS\Device\ST\STM32U5xx\Source\Templates\system_stm32u5xx.c" version="1.0.0">
+      <file attr="config" category="source" condition="noTZ" name="Drivers\CMSIS\Device\ST\STM32U5xx\Source\Templates\system_stm32u5xx.c" version="1.2.0">
         <instance index="0">RTE\Device\STM32U585AIIx\system_stm32u5xx.c</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.1.0" condition="STM32U5 CMSIS"/>
-        <package name="STM32U5xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
+        <component Cclass="Device" Cgroup="Startup" Cvariant="Source ASM" Cvendor="Keil" Cversion="1.2.0" condition="STM32U5 CMSIS" isDefaultVariant="1"/>
+        <package name="STM32U5xx_DFP" schemaVersion="1.7.15" url="https://www.keil.com/pack/" vendor="Keil" version="2.1.0"/>
         <targetInfos>
           <targetInfo name="B-U585I-IOT02A"/>
         </targetInfos>

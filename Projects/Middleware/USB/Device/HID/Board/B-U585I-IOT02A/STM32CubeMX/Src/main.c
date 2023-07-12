@@ -363,6 +363,8 @@ static void SystemPower_Config(void)
   {
     Error_Handler();
   }
+/* USER CODE BEGIN PWR */
+/* USER CODE END PWR */
 }
 
 /**
@@ -389,7 +391,7 @@ static void MX_ADC4_Init(void)
   hadc4.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
   hadc4.Init.Resolution = ADC_RESOLUTION_12B;
   hadc4.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc4.Init.ScanConvMode = ADC4_SCAN_DISABLE;
+  hadc4.Init.ScanConvMode = ADC_SCAN_DIRECTION_FORWARD;
   hadc4.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   hadc4.Init.LowPowerAutoPowerOff = ADC_LOW_POWER_NONE;
   hadc4.Init.LowPowerAutoWait = DISABLE;
@@ -412,7 +414,7 @@ static void MX_ADC4_Init(void)
   /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_5;
-  sConfig.Rank = ADC4_REGULAR_RANK_1;
+  sConfig.Rank = ADC4_RANK_CHANNEL_NUMBER;
   sConfig.SamplingTime = ADC4_SAMPLINGTIME_COMMON_1;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
@@ -449,6 +451,7 @@ static void MX_ADF1_Init(void)
   AdfHandle0.Init.CommonParam.ProcClockDivider = 1;
   AdfHandle0.Init.CommonParam.OutputClock.Activation = DISABLE;
   AdfHandle0.Init.SerialInterface.Activation = ENABLE;
+  AdfHandle0.Init.SerialInterface.Mode = MDF_SITF_LF_MASTER_SPI_MODE;
   AdfHandle0.Init.SerialInterface.ClockSource = MDF_SITF_CCK0_SOURCE;
   AdfHandle0.Init.SerialInterface.Threshold = 4;
   AdfHandle0.Init.FilterBistream = MDF_BITSTREAM0_FALLING;
@@ -1149,6 +1152,7 @@ static void MX_USB_OTG_FS_PCD_Init(void)
   /* USER CODE END USB_OTG_FS_Init 1 */
   hpcd_USB_OTG_FS.Instance = USB_OTG_FS;
   hpcd_USB_OTG_FS.Init.dev_endpoints = 6;
+  hpcd_USB_OTG_FS.Init.speed = PCD_SPEED_FULL;
   hpcd_USB_OTG_FS.Init.phy_itface = PCD_PHY_EMBEDDED;
   hpcd_USB_OTG_FS.Init.Sof_enable = DISABLE;
   hpcd_USB_OTG_FS.Init.low_power_enable = DISABLE;
@@ -1156,6 +1160,7 @@ static void MX_USB_OTG_FS_PCD_Init(void)
   hpcd_USB_OTG_FS.Init.battery_charging_enable = DISABLE;
   hpcd_USB_OTG_FS.Init.use_dedicated_ep1 = DISABLE;
   hpcd_USB_OTG_FS.Init.vbus_sensing_enable = DISABLE;
+  hpcd_USB_OTG_FS.Init.dma_enable = DISABLE;
   if (HAL_PCD_Init(&hpcd_USB_OTG_FS) != HAL_OK)
   {
     Error_Handler();
@@ -1174,6 +1179,8 @@ static void MX_USB_OTG_FS_PCD_Init(void)
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
+/* USER CODE BEGIN MX_GPIO_Init_1 */
+/* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOG_CLK_ENABLE();
@@ -1324,6 +1331,8 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_SetPriority(EXTI15_IRQn, 8, 0);
   HAL_NVIC_EnableIRQ(EXTI15_IRQn);
 
+/* USER CODE BEGIN MX_GPIO_Init_2 */
+/* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */

@@ -1,6 +1,6 @@
 Configuration	STM32CubeMX
-STM32CubeMX 	6.7.0
-Date	01/25/2023
+STM32CubeMX 	6.9.0
+Date	07/12/2023
 MCU	STM32U585AIIxQ
 
 
@@ -280,9 +280,9 @@ SOFTWARE PROJECT
 
 Project Settings : 
 Project Name : STM32CubeMX
-Project Folder : D:\GitHub\MiloradCvjetkovic\Forked\MDK-Packs\B-U585I-IOT02A_BSP\Projects\Platform - Copy\Board\B-U585I-IOT02A\STM32CubeMX
+Project Folder : D:\Temp\B-U585I-IOT02A_BSP\Projects\Platform\Board\B-U585I-IOT02A\STM32CubeMX
 Toolchain / IDE : MDK-ARM V5.32
-Firmware Package Name and Version : STM32Cube FW_U5 V1.1.1
+Firmware Package Name and Version : STM32Cube FW_U5 V1.2.0
 
 
 Code Generation Settings : 
