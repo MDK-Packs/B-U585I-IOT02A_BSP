@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2021 Arm Limited. All rights reserved.
+ * Copyright (c) 2013-2023 Arm Limited. All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -17,7 +17,7 @@
  *
  * -----------------------------------------------------------------------------
  *
- * $Revision:   V5.5.2
+ * $Revision:   V5.6.0
  *
  * Project:     CMSIS-RTOS RTX
  * Title:       RTX Configuration definitions
@@ -146,6 +146,20 @@
 #define OS_IDLE_THREAD_TZ_MOD_ID    0
 #endif
  
+//   <o>Idle Thread Safety Class <0-15>
+//   <i> Defines the Safety Class number.
+//   <i> Default: 0
+#ifndef OS_IDLE_THREAD_CLASS
+#define OS_IDLE_THREAD_CLASS        0
+#endif
+ 
+//   <o>Idle Thread Zone <0-127>
+//   <i> Defines Thread Zone.
+//   <i> Default: 0
+#ifndef OS_IDLE_THREAD_ZONE
+#define OS_IDLE_THREAD_ZONE         0
+#endif
+ 
 //   <q>Stack overrun checking
 //   <i> Enables stack overrun check at thread switch (requires RTX source variant).
 //   <i> Enabling this option increases slightly the execution time of a thread switch.
@@ -160,10 +174,10 @@
 #define OS_STACK_WATERMARK          0
 #endif
  
-//   <o>Processor mode for Thread execution
+//   <o>Default Processor mode for Thread execution
 //     <0=> Unprivileged mode
 //     <1=> Privileged mode
-//   <i> Default: Privileged mode
+//   <i> Default: Unprivileged mode
 #ifndef OS_PRIVILEGE_MODE
 #define OS_PRIVILEGE_MODE           1
 #endif
@@ -213,6 +227,20 @@
 //   <i> Default: 0 (not used)
 #ifndef OS_TIMER_THREAD_TZ_MOD_ID
 #define OS_TIMER_THREAD_TZ_MOD_ID   0
+#endif
+ 
+//   <o>Timer Thread Safety Class <0-15>
+//   <i> Defines the Safety Class number.
+//   <i> Default: 0
+#ifndef OS_TIMER_THREAD_CLASS
+#define OS_TIMER_THREAD_CLASS       0
+#endif
+ 
+//   <o>Timer Thread Zone <0-127>
+//   <i> Defines Thread Zone.
+//   <i> Default: 0
+#ifndef OS_TIMER_THREAD_ZONE
+#define OS_TIMER_THREAD_ZONE        0
 #endif
  
 //   <o>Timer Callback Queue entries <0-256>
