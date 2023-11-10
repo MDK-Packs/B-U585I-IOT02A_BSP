@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
  * MDK Middleware - Component ::USB:Device
- * Copyright (c) 2004-2020 Arm Limited (or its affiliates). All rights reserved.
+ * Copyright (c) 2004-2023 Arm Limited (or its affiliates). All rights reserved.
  *------------------------------------------------------------------------------
  * Name:    USBD_Config_HID_0.h
  * Purpose: USB Device Human Interface Device class (HID) Configuration
- * Rev.:    V5.0.2
+ * Rev.:    V5.1.0
  *----------------------------------------------------------------------------*/
 
 //-------- <<< Use Configuration Wizard in Context Menu >>> --------------------
@@ -119,7 +119,7 @@
 //   <i>and for memory allocation in the USB component.
 //
 //     <s.126>HID Interface String
-#define USBD_HID0_STR_DESC                        L"USB_HID0"
+#define USBD_HID0_STR_DESC_RAW                    "USB_HID0"
 
 //     <o.0..4>Number of Input Reports <1-32>
 //     <i>Configures max 'rid' value for USBD_HID0_GetReport and USBD_HID_GetReportTrigger

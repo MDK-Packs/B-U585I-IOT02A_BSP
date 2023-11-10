@@ -20,12 +20,10 @@ The program is available in different targets:
 
  - Debug:
    - Compiler:                  ARM Compiler optimization Level 1
-   - Compiler:Event Recorder:   Enabled
-   - CMSIS:RTOS2:Keil RTX5:     Source
+   - CMSIS-View:Event Recorder: Enabled
    - USB:CORE:                  Debug
 
  - Release:
    - Compiler:                  ARM Compiler optimization Level 3
-   - Compiler:Event Recorder:   Disabled
-   - CMSIS:RTOS2:Keil RTX5:     Library
+   - CMSIS-View:Event Recorder: Disabled
    - USB:CORE:                  Release
