@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
  * MDK Middleware - Component ::USB:Device
- * Copyright (c) 2004-2019 Arm Limited (or its affiliates). All rights reserved.
+ * Copyright (c) 2004-2023 Arm Limited (or its affiliates). All rights reserved.
  *------------------------------------------------------------------------------
  * Name:    USBD_Config_MSC_0.h
  * Purpose: USB Device Mass Storage Class (MSC) Configuration
- * Rev.:    V5.1.1
+ * Rev.:    V5.2.0
  *----------------------------------------------------------------------------*/
 
 //-------- <<< Use Configuration Wizard in Context Menu >>> --------------------
@@ -64,7 +64,7 @@
 //   <i>in the USB component.
 //
 //     <s.126>MSC Interface String
-#define USBD_MSC0_STR_DESC              L"USB_MSC0"
+#define USBD_MSC0_STR_DESC_RAW          "USB_MSC0"
 
 //     <o0.0..1>Maximum Number of Logical Units (LUN)
 //     <i>For single LUN use 1, otherwise 2-4.

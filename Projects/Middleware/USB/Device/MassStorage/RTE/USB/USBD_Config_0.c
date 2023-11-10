@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
  * MDK Middleware - Component ::USB:Device
- * Copyright (c) 2004-2019 Arm Limited (or its affiliates). All rights reserved.
+ * Copyright (c) 2004-2023 Arm Limited (or its affiliates). All rights reserved.
  *------------------------------------------------------------------------------
  * Name:    USBD_Config_0.c
  * Purpose: USB Device Configuration
- * Rev.:    V5.2.0
+ * Rev.:    V5.3.0
  *------------------------------------------------------------------------------
  * Use the following configuration settings in the Device Class configuration
  * files to assign a Device Class to this USB Device 0.
@@ -123,84 +123,5 @@
 //   </h>
 // </h>
 
-
-#include "RTE_Components.h"
-
-#ifdef  RTE_USB_Device_CustomClass_0
-#include "USBD_Config_CustomClass_0.h"
-#endif
-#ifdef  RTE_USB_Device_CustomClass_1
-#include "USBD_Config_CustomClass_1.h"
-#endif
-#ifdef  RTE_USB_Device_CustomClass_2
-#include "USBD_Config_CustomClass_2.h"
-#endif
-#ifdef  RTE_USB_Device_CustomClass_3
-#include "USBD_Config_CustomClass_3.h"
-#endif
-
-#ifdef  RTE_USB_Device_HID_0
-#include "USBD_Config_HID_0.h"
-#endif
-#ifdef  RTE_USB_Device_HID_1
-#include "USBD_Config_HID_1.h"
-#endif
-#ifdef  RTE_USB_Device_HID_2
-#include "USBD_Config_HID_2.h"
-#endif
-#ifdef  RTE_USB_Device_HID_3
-#include "USBD_Config_HID_3.h"
-#endif
-
-#ifdef  RTE_USB_Device_MSC_0
-#include "USBD_Config_MSC_0.h"
-#endif
-#ifdef  RTE_USB_Device_MSC_1
-#include "USBD_Config_MSC_1.h"
-#endif
-#ifdef  RTE_USB_Device_MSC_2
-#include "USBD_Config_MSC_2.h"
-#endif
-#ifdef  RTE_USB_Device_MSC_3
-#include "USBD_Config_MSC_3.h"
-#endif
-
-#ifdef  RTE_USB_Device_CDC_0
-#include "USBD_Config_CDC_0.h"
-#endif
-#ifdef  RTE_USB_Device_CDC_1
-#include "USBD_Config_CDC_1.h"
-#endif
-#ifdef  RTE_USB_Device_CDC_2
-#include "USBD_Config_CDC_2.h"
-#endif
-#ifdef  RTE_USB_Device_CDC_3
-#include "USBD_Config_CDC_3.h"
-#endif
-#ifdef  RTE_USB_Device_CDC_4
-#include "USBD_Config_CDC_4.h"
-#endif
-#ifdef  RTE_USB_Device_CDC_5
-#include "USBD_Config_CDC_5.h"
-#endif
-#ifdef  RTE_USB_Device_CDC_6
-#include "USBD_Config_CDC_6.h"
-#endif
-#ifdef  RTE_USB_Device_CDC_7
-#include "USBD_Config_CDC_7.h"
-#endif
-
-#ifdef  RTE_USB_Device_ADC_0
-#include "USBD_Config_ADC_0.h"
-#endif
-#ifdef  RTE_USB_Device_ADC_1
-#include "USBD_Config_ADC_1.h"
-#endif
-#ifdef  RTE_USB_Device_ADC_2
-#include "USBD_Config_ADC_2.h"
-#endif
-#ifdef  RTE_USB_Device_ADC_3
-#include "USBD_Config_ADC_3.h"
-#endif
 
 #include "usbd_config.h"
