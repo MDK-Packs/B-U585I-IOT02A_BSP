@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
  * MDK Middleware - Component ::USB:Host
- * Copyright (c) 2004-2019 Arm Limited (or its affiliates). All rights reserved.
+ * Copyright (c) 2004-2023 Arm Limited (or its affiliates). All rights reserved.
  *------------------------------------------------------------------------------
  * Name:    USBH_Config_0.c
  * Purpose: USB Host Configuration
- * Rev.:    V5.2.1
+ * Rev.:    V5.3.0
  *----------------------------------------------------------------------------*/
 
 //-------- <<< Use Configuration Wizard in Context Menu >>> --------------------
@@ -120,23 +120,5 @@
 //   </h>
 // </h>
 
-
-#include "RTE_Components.h"
-
-#ifdef  RTE_USB_Host_MSC
-#include "USBH_Config_MSC.h"
-#endif
-
-#ifdef  RTE_USB_Host_HID
-#include "USBH_Config_HID.h"
-#endif
-
-#ifdef  RTE_USB_Host_CDC
-#include "USBH_Config_CDC.h"
-#endif
-
-#ifdef  RTE_USB_Host_CustomClass
-#include "USBH_Config_CustomClass.h"
-#endif
 
 #include "usbh_config.h"
