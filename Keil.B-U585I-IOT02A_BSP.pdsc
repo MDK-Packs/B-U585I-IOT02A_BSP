@@ -8,6 +8,9 @@
   <license>LICENSE</license>
 
   <releases>
+    <release version="1.1.0-dev3">
+      Synchronized with STM32CubeU5 Firmware Package version V1.2.0
+    </release>
     <release version="1.1.0-dev2">
       Pack Description:
       - Add LICENSE file
@@ -61,7 +64,7 @@
 
   <requirements>
     <packages>
-      <package vendor="Keil" name="STM32U5xx_DFP" version="2.0.0-0"/>
+      <package vendor="Keil" name="STM32U5xx_DFP" version="2.1.0-0"/>
       <package vendor="ARM"  name="CMSIS"         version="5.8.0-0"/>
     </packages>
   </requirements>
