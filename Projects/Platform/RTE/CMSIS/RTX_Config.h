@@ -73,6 +73,61 @@
  
 //   </e>
  
+//   <e>Safety features (Source variant only)
+//   <i> Enables FuSa related features.
+//   <i> Requires RTX Source variant.
+//   <i> Enables:
+//   <i>  - selected features from this group
+//   <i>  - Thread functions: osThreadProtectPrivileged
+#ifndef OS_SAFETY_FEATURES
+#define OS_SAFETY_FEATURES          0
+#endif
+ 
+//     <q>Safety Class
+//     <i> Threads assigned to lower classes cannot modify higher class threads.
+//     <i> Enables:
+//     <i>  - Object attributes: osSafetyClass
+//     <i>  - Kernel functions: osKernelProtect, osKernelDestroyClass
+//     <i>  - Thread functions: osThreadGetClass, osThreadSuspendClass, osThreadResumeClass
+#ifndef OS_SAFETY_CLASS
+#define OS_SAFETY_CLASS             1
+#endif
+ 
+//     <q>MPU Protected Zone
+//     <i> Access protection via MPU (Spatial isolation).
+//     <i> Enables:
+//     <i>  - Thread attributes: osThreadZone
+//     <i>  - Thread functions: osThreadGetZone, osThreadTerminateZone
+//     <i>  - Zone Management: osZoneSetup_Callback
+#ifndef OS_EXECUTION_ZONE
+#define OS_EXECUTION_ZONE           1
+#endif
+ 
+//     <q>Thread Watchdog
+//     <i> Watchdog alerts ensure timing for critical threads (Temporal isolation).
+//     <i> Enables:
+//     <i>  - Thread functions: osThreadFeedWatchdog
+//     <i>  - Handler functions: osWatchdogAlarm_Handler
+#ifndef OS_THREAD_WATCHDOG
+#define OS_THREAD_WATCHDOG          1
+#endif
+ 
+//     <q>Object Pointer checking
+//     <i> Check object pointer alignment and memory region.
+#ifndef OS_OBJ_PTR_CHECK
+#define OS_OBJ_PTR_CHECK            0
+#endif
+ 
+//     <q>SVC Function Pointer checking
+//     <i> Check SVC function pointer alignment and memory region.
+//     <i> User needs to define a linker execution region RTX_SVC_VENEERS
+//     <i> containing input sections: rtx_*.o (.text.os.svc.veneer.*)
+#ifndef OS_SVC_PTR_CHECK
+#define OS_SVC_PTR_CHECK            0
+#endif
+ 
+//   </e>
+ 
 //   <o>ISR FIFO Queue
 //      <4=>  4 entries    <8=>   8 entries   <12=>  12 entries   <16=>  16 entries
 //     <24=> 24 entries   <32=>  32 entries   <48=>  48 entries   <64=>  64 entries
